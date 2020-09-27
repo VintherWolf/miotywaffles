@@ -48,6 +48,9 @@ void setup()
     {
         Log.info("%s Waffle Iron Process Started!", Time.timeStr().c_str());
     }
+    // TO-DO: Enable Waffle Iron by turning Relay On
+
+    // TO-DO: Verify Waffle Iron turned ON (LED = Orange)
 
     /**
     *=======================================================
@@ -58,9 +61,11 @@ void setup()
 
     if (!sc.SonosPlay("heating"))
     {
-        // Buzzer ->> Beep Beep
+        Log.info("%s Connection Lost: Music cannot play!", Time.timeStr().c_str());
+        // TO-DO: Buzzer ->> Beep Beep
     }
 
+    // TO-DO: Wait for WaffleIron LED to be Green
     // Fast Paced delay to simulate Waffleiron
     delay(10000);
     /**
@@ -74,7 +79,7 @@ void setup()
     {
         // Buzzer ->> Beep Beep
     }
-
+    // TO-DO: Wait for WaffleIron Lid to open and close again
     // Fast Paced delay to simulate Waffleiron
     delay(10000);
     /**
@@ -83,14 +88,19 @@ void setup()
     *=======================================================
     **/
     Log.info("%s State is now: Baking", Time.timeStr().c_str());
-
+    // TO-DO: Set timer to x minutes y seconds
+    // Fast Paced delay to simulate Waffleiron
     if (!sc.SonosPlay("baking"))
     {
         // Buzzer ->> Beep Beep
     }
-
+    // TO-DO: Wait for timer to run out
     // Fast Paced delay to simulate Waffleiron
     delay(10000);
+
+    // TO-DO: Turn off Relay
+
+    // TO-DO: Check that Relay turned off (no LED light from waffleiron)
 }
 
 /***********************************************************************
@@ -98,8 +108,5 @@ void setup()
  ***********************************************************************/
 void loop()
 {
-    delay(30000);
-    Log.info("Sending Heating");
-    sc.SonosPlay("heating");
-    Log.info("Done");
+    // Do Nothing
 }
