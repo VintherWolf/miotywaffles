@@ -1,3 +1,11 @@
+# Photon Firmware
+photon_firmware*
+
+# Folders
+/.vscode
+/build
+/debug
+
 # Prerequisites
 *.d
 
@@ -30,3 +38,9 @@
 *.exe
 *.out
 *.app
+
+# Media Files
+*.doc*
+*.png
+*.jpg
+*.xmind
