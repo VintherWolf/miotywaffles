@@ -29,7 +29,8 @@ SonosControl sc;
 
 // RGB Color Sensor
 RgbColorSensor rgb;
-bool rgbSensorConnected;
+bool rgbSensorConnected = false;
+int RgbColor = 0;
 
 // Time Logging
 //time_t time = Time.now();
@@ -69,18 +70,31 @@ void loop()
 
     delay(10000);
     Log.info("%s I2C Test", Time.timeStr().c_str());
-
+    rgbSensorConnected = false;
     rgbSensorConnected = rgb.sensorConnected();
 
     if (rgbSensorConnected)
     {
-        Log.info("%s RGB SENSOR CONNECTED", Time.timeStr().c_str());
+        Log.info("%s RGB SENSOR CONNECTED %d", Time.timeStr().c_str(), rgb._deviceID);
     }
     else
     {
         Log.info("%s RGB SENSOR NOT PRESENT", Time.timeStr().c_str());
     }
+
+    for (int i = 0; i < 100; i++)
+    {
+
+        RgbColor = rgb.getColor();
+        Log.info("%s Reading Number: %d", Time.timeStr().c_str(), i);
+        Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
+
+        Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(), rgb._redValue, rgb._greenValue, rgb._redValue - rgb._greenValue);
+        delay(5000);
+    }
+
     Log.info("%s QUIT APP Now", Time.timeStr().c_str());
+
     delay(900000);
 }
 

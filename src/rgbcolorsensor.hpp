@@ -32,23 +32,21 @@ class RgbColorSensor
 
 public:
     /* Attributes */
-
+    int _deviceID;
+    int _redValue;
+    int _greenValue;
     /* Methods */
     RgbColorSensor();
     ~RgbColorSensor();
     bool sensorConnected();
-    String getColor();
+    int getColor();
 
 private:
     /* Attributes */
-    int _greenValue;
-    int _redValue;
-    int _deviceID;
 
     /* Methods */
     void initSensor();
-    int getGreenValue();
-    int getRedValue();
+    int getColorValue();
 };
 
 #endif

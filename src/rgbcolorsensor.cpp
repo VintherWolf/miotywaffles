@@ -58,22 +58,51 @@ bool RgbColorSensor::sensorConnected()
     // Device ID 0x44 in SubAddress 0xB2, return true:
 }
 
-String RgbColorSensor::getColor()
+int RgbColorSensor::getColor()
 {
-    // get red and green value and return
-    // dominant color as string
+    int diff = 0;
+    this->getColorValue();
 
-    //
+    diff = this->_redValue - this->_greenValue;
+
+    // diff: Negative => Green is dominant,
+    //       Positive => Red is dominant
+    //       Diff shall be 5 or more to trig af shift.
+    if (diff > 25)
+    {
+        // Red is dominant
+        return 1;
+    }
+    else if (diff < -25)
+    {
+        // Green is dominant
+        return 2;
+    }
+    else
+    {
+        // No dominant color
+        return 0;
+    }
 }
 
-int RgbColorSensor::getGreenValue()
+int RgbColorSensor::getColorValue()
 {
-    // Get green low + high:
+    // Get green low + high = 2bytes:
     // low(reg:0xB8) High(reg:0xB9)
-}
-
-int RgbColorSensor::getRedValue()
-{
-    // Get red low + high:
+    // Get red low + high = 2bytes:
     // low(reg:0xB6) High(reg:0xB7)
+
+    /* Get Red Value */
+    Wire.beginTransmission(WireTransmission(RGB_SENSOR_ADDR).timeout(200ms));
+    Wire.write(COMMAND_REG | RED_LOW);
+    Wire.endTransmission();
+    Wire.requestFrom(RGB_SENSOR_ADDR, 2);
+    this->_redValue = (int)Wire.read();
+
+    /* Get Green Value */
+    Wire.beginTransmission(WireTransmission(RGB_SENSOR_ADDR).timeout(200ms));
+    Wire.write(COMMAND_REG | GREEN_LOW);
+    Wire.endTransmission();
+    Wire.requestFrom(RGB_SENSOR_ADDR, 2);
+    this->_greenValue = (int)Wire.read();
 }

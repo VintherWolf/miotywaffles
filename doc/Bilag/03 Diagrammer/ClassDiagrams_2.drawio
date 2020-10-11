@@ -1,1 +1,22 @@
-<mxfile host="app.diagrams.net" modified="2020-10-08T19:53:25.896Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36" etag="G4y-K1S1rt4pcd6i_K9g" version="13.7.8" type="device"><diagram id="ftzK3skFXpYELHJWYk5C" name="Page-1">7VZdb9owFP01kbaHTvmAlj2W0LXaqFQB2h4nk1wSr05u5JgC/fW7Tm4IISDRadVeJkUoPj429jnnXsUJwmx7r0WRPmIMyvHdeOsEE8f3vYHvO/Zx412N3Hwe1ECiZcykFpjLV2DQZXQtYyg7RIOojCy6YIR5DpHpYEJr3HRpK1Tdfy1EAj1gHgnVR3/I2KQ1Ohq6Lf4AMkmbf/ZcnslEQ2agTEWMmwMouHOCUCOa+i3bhqCseI0u9bovZ2b3B9OQm0sWzFT0K3G/wWJ0X2YPizV8vVtc8S4vQq35wrNkGaJCPYe8RM1HN7tGj3IjMyVyGo1XmJs5z3g0FkomOb1HdCDQBLyANpKkvOUJgwWhUSpVPBU7XNtjl0ZEz81onKKWr7StULwnTWvDqfCvO4y5XUmwS6iGkjhPjRbeEfQoth3iVJSGgQiVEkUpl/trZEInMh+jMZgxiUWi68D2rPre3lMqBsAMjN4RhRf4I44B14F3zeNNm6p9VNLDRA1HnGZOcrLfuzWbXtjvN3jv97x3/LF1u3I+rAsK4g8fCXOCW/pdUuU5ZIMfeFaWK4J+Jhog/17t0dAkSXLE0hCf4Bxli9Q1lecan6EKIeE51mGTSh1BTd4UrMzZtJWFiGSeTCvOZNAiM5bYQkhrV6oqzlTGMeQ2KWiEEXUs7DUKpCNXFgzH9JBToftp6Azp4CGNvXZMj6VrQxLSXYSsEgKUuQ3Y3F0Wp/Pl2s8YZ8pqfkmkhoN3SlRwIlFHHitZeVd73HRU748MzsgqBa2jC2v45MrruR70XQ9OOKzEEtQTltJItPvrmnvk/L8yd3Rhv3ivbjHoeWsLOwFzv28A1CnO1D/RZtwBTpPqzkO0KgINhwQmz/73ib8dpdFlUbpx35wlGrZfNNXcwXdhcPcb</diagram></mxfile>
+<mxfile host="65bd71144e" modified="2020-10-11T16:37:59.785Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.50.0 Chrome/83.0.4103.122 Electron/9.2.1 Safari/537.36" etag="sozG7d_iZRhz_7xyC68o" version="13.6.5">
+    <diagram id="ftzK3skFXpYELHJWYk5C" name="Page-1">
+        <mxGraphModel dx="558" dy="365" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="Rlcjg0KeT8GsmHTueJET-1" value="RgbColorSensor" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="90" width="220" height="158" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlcjg0KeT8GsmHTueJET-2" value="+ sensorConnected() : bool&#10;- _greenValue : int&#10;- _redValue : int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Rlcjg0KeT8GsmHTueJET-1" vertex="1">
+                    <mxGeometry y="26" width="220" height="54" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlcjg0KeT8GsmHTueJET-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="Rlcjg0KeT8GsmHTueJET-1" vertex="1">
+                    <mxGeometry y="80" width="220" height="8" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlcjg0KeT8GsmHTueJET-4" value="- getGreenValue()&#10;- getRedValue()&#10;+ getColor(): string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Rlcjg0KeT8GsmHTueJET-1" vertex="1">
+                    <mxGeometry y="88" width="220" height="70" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
