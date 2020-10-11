@@ -14,6 +14,9 @@
 
 RgbColorSensor::RgbColorSensor()
 {
+
+    Colors_t colors = noChange;
+
     // From Particle.h, set up I2C:
     Wire.setSpeed(CLOCK_SPEED_100KHZ);
     if (!Wire.isEnabled())
@@ -67,21 +70,21 @@ int RgbColorSensor::getColor()
 
     // diff: Negative => Green is dominant,
     //       Positive => Red is dominant
-    //       Diff shall be 5 or more to trig af shift.
-    if (diff > 25)
+    //       Diff shall be 25 or more to change color (hysteresis)
+    if (diff > COLOR_HYSTERESIS)
     {
         // Red is dominant
-        return 1;
+        return Red;
     }
-    else if (diff < -25)
+    else if (diff < -COLOR_HYSTERESIS)
     {
         // Green is dominant
-        return 2;
+        return Green;
     }
     else
     {
         // No dominant color
-        return 0;
+        return noChange;
     }
 }
 

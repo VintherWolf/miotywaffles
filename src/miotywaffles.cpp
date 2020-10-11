@@ -3,7 +3,7 @@
  * Source File	: 	miotywaffles.cpp
  * Author		: 	Daniel K. Vinther Wolf 
  * Created		:	20200917
- * Version		:	0.2.1
+ * Version		:	0.3.0
  * 
  * Description	:	MiotyWaffles
  * 
@@ -36,6 +36,9 @@ int RgbColor = 0;
 //time_t time = Time.now();
 //Time.format(time, TIME_FORMAT_ISO8601_FULL);
 
+// Forward Definition
+void miotyWaffles();
+
 /***********************************************************************
  *  @brief setup() runs once when the device is first turned on.
  ***********************************************************************/
@@ -57,7 +60,7 @@ void setup()
 
     if (Time.isValid())
     {
-        Log.info("%s Time is Valid. Waffle Iron Process Started!",
+        Log.info("%s Time is Valid! Waffle Iron Process Started!",
                  Time.timeStr().c_str());
     }
 }
@@ -68,34 +71,7 @@ void setup()
 void loop()
 {
 
-    delay(10000);
-    Log.info("%s I2C Test", Time.timeStr().c_str());
-    rgbSensorConnected = false;
-    rgbSensorConnected = rgb.sensorConnected();
-
-    if (rgbSensorConnected)
-    {
-        Log.info("%s RGB SENSOR CONNECTED %d", Time.timeStr().c_str(), rgb._deviceID);
-    }
-    else
-    {
-        Log.info("%s RGB SENSOR NOT PRESENT", Time.timeStr().c_str());
-    }
-
-    for (int i = 0; i < 100; i++)
-    {
-
-        RgbColor = rgb.getColor();
-        Log.info("%s Reading Number: %d", Time.timeStr().c_str(), i);
-        Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
-
-        Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(), rgb._redValue, rgb._greenValue, rgb._redValue - rgb._greenValue);
-        delay(5000);
-    }
-
-    Log.info("%s QUIT APP Now", Time.timeStr().c_str());
-
-    delay(900000);
+    miotyWaffles();
 }
 
 void miotyWaffles()
@@ -103,7 +79,42 @@ void miotyWaffles()
     delay(20000);
     // TO-DO: Enable Waffle Iron by turning Relay On
 
-    // TO-DO: Verify Waffle Iron turned ON (LED = Orange)
+    // Verify Waffle Iron turned ON (LED = Orange)
+    rgbSensorConnected = rgb.sensorConnected();
+
+    if (rgbSensorConnected)
+    {
+        Log.info("%s RGB Sensor Initialized %d", Time.timeStr().c_str(), rgb._deviceID);
+        delay(1000);
+    }
+    else
+    {
+        Log.info("%s RGB SENSOR NOT PRESENT", Time.timeStr().c_str());
+        EXIT_FAILURE;
+    }
+
+    RgbColor = rgb.getColor();
+
+    Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
+    Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
+             rgb._redValue, rgb._greenValue, rgb._redValue - rgb._greenValue);
+
+    int timeout = 0;
+    while (RgbColor != Red)
+    {
+        ++timeout;
+        delay(1000);
+
+        Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
+        Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
+                 rgb._redValue, rgb._greenValue, rgb._redValue - rgb._greenValue);
+
+        if (timeout > 10 && RgbColor != Green)
+        {
+            Log.info("Waffle Iron is not powered ON!");
+            EXIT_FAILURE;
+        }
+    }
 
     /**
     *=======================================================
@@ -120,9 +131,12 @@ void miotyWaffles()
     }
     Log.info("%s Music Should Change About Now!",
              Time.timeStr().c_str());
-    // TO-DO: Wait for WaffleIron LED to be Green
-    // Fast Paced delay to simulate Waffleiron
-    delay(60000);
+
+    // Wait for WaffleIron LED to be Green
+    while (RgbColor != Green)
+    {
+        delay(1000);
+    }
     /**
     *=======================================================
     * STATE: Ready
@@ -164,4 +178,6 @@ void miotyWaffles()
     // TO-DO: Check that Relay turned off (no LED light from waffleiron)
 
     delay(60000);
+    Log.info("%s All Done! Have an Enjoyable Day!", Time.timeStr().c_str());
+    EXIT_SUCCESS;
 }
