@@ -44,3 +44,9 @@ photon_firmware*
 *.png
 *.jpg
 *.xmind
+
+.vscode
+
+
+# OrCAD Files
+/doc/Bilag/03 Diagrammer/Hardware*

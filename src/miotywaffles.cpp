@@ -3,7 +3,7 @@
  * Source File	: 	miotywaffles.cpp
  * Author		: 	Daniel K. Vinther Wolf 
  * Created		:	20200917
- * Version		:	0.2.0
+ * Version		:	0.2.1
  * 
  * Description	:	MiotyWaffles
  * 
@@ -14,6 +14,7 @@
 
 #include "pinsettings.h"
 #include "sonos.hpp"
+#include "rgbcolorsensor.hpp"
 
 /**
 *=======================================================
@@ -25,6 +26,10 @@ SerialLogHandler logHandler;
 
 // Sonos API
 SonosControl sc;
+
+// RGB Color Sensor
+RgbColorSensor rgb;
+bool rgbSensorConnected;
 
 // Time Logging
 //time_t time = Time.now();
@@ -41,7 +46,8 @@ void setup()
     * Process Start, Setting up 
     *=======================================================
     **/
-    Log.info("%s Syncronizing Time with Particle Cloud!", Time.timeStr().c_str());
+    Log.info("%s Syncronizing Time with Particle Cloud!",
+             Time.timeStr().c_str());
     Particle.syncTime();
 
     waitUntil(Particle.syncTimeDone);
@@ -50,7 +56,8 @@ void setup()
 
     if (Time.isValid())
     {
-        Log.info("%s Waffle Iron Process Started!", Time.timeStr().c_str());
+        Log.info("%s Time is Valid. Waffle Iron Process Started!",
+                 Time.timeStr().c_str());
     }
 }
 
@@ -58,6 +65,26 @@ void setup()
  *  @brief loop() runs over and over again, as quickly as it can execute.
  ***********************************************************************/
 void loop()
+{
+
+    delay(10000);
+    Log.info("%s I2C Test", Time.timeStr().c_str());
+
+    rgbSensorConnected = rgb.sensorConnected();
+
+    if (rgbSensorConnected)
+    {
+        Log.info("%s RGB SENSOR CONNECTED", Time.timeStr().c_str());
+    }
+    else
+    {
+        Log.info("%s RGB SENSOR NOT PRESENT", Time.timeStr().c_str());
+    }
+    Log.info("%s QUIT APP Now", Time.timeStr().c_str());
+    delay(900000);
+}
+
+void miotyWaffles()
 {
     delay(20000);
     // TO-DO: Enable Waffle Iron by turning Relay On
@@ -73,10 +100,12 @@ void loop()
 
     if (!sc.SonosPlay("heating"))
     {
-        Log.info("%s Connection Lost: Music cannot play!", Time.timeStr().c_str());
+        Log.info("%s Connection Lost: Music cannot play!",
+                 Time.timeStr().c_str());
         // TO-DO: Buzzer ->> Beep Beep
     }
-    Log.info("%s Music Should Change About Now!", Time.timeStr().c_str());
+    Log.info("%s Music Should Change About Now!",
+             Time.timeStr().c_str());
     // TO-DO: Wait for WaffleIron LED to be Green
     // Fast Paced delay to simulate Waffleiron
     delay(60000);
@@ -89,7 +118,8 @@ void loop()
 
     if (!sc.SonosPlay("ready"))
     {
-        Log.info("%s Connection Lost: Music cannot play!", Time.timeStr().c_str());
+        Log.info("%s Connection Lost: Music cannot play!",
+                 Time.timeStr().c_str());
         // Buzzer ->> Beep Beep
     }
     Log.info("%s Music Should Change About Now!", Time.timeStr().c_str());
@@ -106,7 +136,8 @@ void loop()
     // Fast Paced delay to simulate Waffleiron
     if (!sc.SonosPlay("baking"))
     {
-        Log.info("%s Connection Lost: Music cannot play!", Time.timeStr().c_str());
+        Log.info("%s Connection Lost: Music cannot play!",
+                 Time.timeStr().c_str());
         // Buzzer ->> Beep Beep
     }
     Log.info("%s Music Should Change About Now!", Time.timeStr().c_str());
