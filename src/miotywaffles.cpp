@@ -63,6 +63,8 @@ void setup()
         Log.info("%s Time is Valid! Waffle Iron Process Started!",
                  Time.timeStr().c_str());
     }
+
+    miotyWaffles();
 }
 
 /***********************************************************************
@@ -71,7 +73,7 @@ void setup()
 void loop()
 {
 
-    miotyWaffles();
+    //
 }
 
 void miotyWaffles()
@@ -103,8 +105,8 @@ void miotyWaffles()
     while (RgbColor != Red)
     {
         ++timeout;
-        delay(1000);
-
+        delay(5000);
+        RgbColor = rgb.getColor();
         Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
         Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
                  rgb._redValue, rgb._greenValue, rgb._redValue - rgb._greenValue);
@@ -135,7 +137,8 @@ void miotyWaffles()
     // Wait for WaffleIron LED to be Green
     while (RgbColor != Green)
     {
-        delay(1000);
+        RgbColor = rgb.getColor();
+        delay(5000);
     }
     /**
     *=======================================================

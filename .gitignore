@@ -49,4 +49,16 @@ photon_firmware*
 
 
 # OrCAD Files
-/doc/Bilag/03 Diagrammer/Hardware*
+#/doc/Bilag/03 Diagrammer/Hardware*
+
+*.dbk
+/doc/Bilag/03 Diagrammer/Hardware - Electrical Schematic/*.txt
+/doc/Bilag/03 Diagrammer/Hardware - Electrical Schematic/*.ps
+/doc/Bilag/03 Diagrammer/Hardware - Electrical Schematic/*PSpice*
+/doc/Bilag/03 Diagrammer/Hardware - Electrical Schematic/*olblck
+/doc/Bilag/03 Diagrammer/Hardware - Electrical Schematic/*dsnlck
+/doc/Bilag/03 Diagrammer/Hardware - Electrical Schematic/*mrk
+/doc/Bilag/03 Diagrammer/Hardware - Electrical Schematic/*sim
+
+
+

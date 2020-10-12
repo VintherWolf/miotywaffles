@@ -1,0 +1,182 @@
+(ExpressProject "particle_photosensor"
+  (ProjectVersion "19981106")
+  (ProjectType "Analog or A/D Mixed Mode")
+  (Folder "Design Resources"
+    (Folder "Library"
+      (File
+         "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\analog.olb"
+        (DisplayName
+           "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\analog.olb")
+        (Type "Schematic Library"))
+      (File
+         "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\breakout.olb"
+        (DisplayName
+           "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\breakout.olb")
+        (Type "Schematic Library"))
+      (File
+         "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\source.olb"
+        (DisplayName
+           "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\source.olb")
+        (Type "Schematic Library"))
+      (File
+         "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\sourcstm.olb"
+        (DisplayName
+           "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\sourcstm.olb")
+        (Type "Schematic Library"))
+      (File
+         "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\special.olb"
+        (DisplayName
+           "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\special.olb")
+        (Type "Schematic Library"))
+      (File ".\rgb_sensor.olb"
+        (Type "Schematic Library")))
+    (NoModify)
+    (File ".\miotywaffles.dsn"
+      (Type "Schematic Design"))
+    (BuildFileAddedOrDeleted "x")
+    (CompileFileAddedOrDeleted "x")
+    (ANNOTATE_Scope "0")
+    (ANNOTATE_Mode "1")
+    (ANNOTATE_Action "1")
+    (ANNOTATE_Reset_References_to_1 "FALSE")
+    (ANNOTATE_No_Page_Number_Change "TRUE")
+    (ANNOTATE_Property_Combine "{Value}{Source Package}")
+    (RootChangedForceReNetlist "x"))
+  (Folder "Outputs")
+  (Folder "PSpice Resources"
+    (Folder "Model Libraries")
+    (Folder "Stimulus Files")
+    (Folder "Include Files")
+    (Folder "Simulation Profiles"))
+  (DefaultLibraryBrowseDirectory "library\PSpice")
+  (PartMRUSelector
+    (PORTLEFT-L
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (PORTLEFT-R
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (PORTRIGHT-L
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (PORTBOTH-R
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (RESISTOR
+      (FullPartName "RESISTOR.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    ("SW SPST"
+      (FullPartName "SW SPST.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\OLDLIBS\DEVICE.OLB")
+      (DeviceIndex "0"))
+    (PORTBOTH-L
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    ("CAP NP"
+      (FullPartName "CAP NP.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    (Adafruit1334
+      (FullPartName "Adafruit1334.Normal")
+      (LibraryName
+         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\LIBRARY1.OLB")
+      (DeviceIndex "0"))
+    (OFFPAGELEFT-L
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (VCC_ARROW
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (TitleBlock0
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    (TitleBlockANSILargeN
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
+    ("PHOTO NPN"
+      (FullPartName "PHOTO NPN.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    (LED
+      (FullPartName "LED.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    ("HEADER 12/SM"
+      (FullPartName "HEADER 12/SM.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("HEADER 12"
+      (FullPartName "HEADER 12.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    ("HEADER 16/SM"
+      (FullPartName "HEADER 16/SM.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CONNECTOR.OLB")
+      (DeviceIndex "0"))
+    (R
+      (FullPartName "R.Normal")
+      (LibraryName "..\..\LIBRARY\PSPICE\ANALOG.OLB")
+      (DeviceIndex "0"))
+    (C
+      (FullPartName "C.Normal")
+      (LibraryName "..\..\LIBRARY\PSPICE\ANALOG.OLB")
+      (DeviceIndex "0"))
+    (L
+      (FullPartName "L.Normal")
+      (LibraryName "..\..\LIBRARY\PSPICE\ANALOG.OLB")
+      (DeviceIndex "0"))
+    (VSTIM
+      (FullPartName "VSTIM.Normal")
+      (LibraryName "..\..\LIBRARY\PSPICE\SOURCSTM.OLB")
+      (DeviceIndex "0"))
+    (VDC
+      (FullPartName "VDC.Normal")
+      (LibraryName "..\..\LIBRARY\PSPICE\SOURCE.OLB")
+      (DeviceIndex "0")))
+  (LastUsedLibraryBrowseDirectory "LIBRARY\PSPICE")
+  (MPSSessionName "danie")
+  (GlobalState
+    (FileView
+      (Path "Design Resources")
+      (Path "Design Resources"
+         "C:\Users\danie\Dropbox\E5\IOT\projects\MiotyWaffles\MiotyWaffles\miotywaffles\doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\miotywaffles.dsn")
+      (Path "Design Resources"
+         "C:\Users\danie\Dropbox\E5\IOT\projects\MiotyWaffles\MiotyWaffles\miotywaffles\doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\miotywaffles.dsn"
+         "Top")
+      (Path "Design Resources"
+         "C:\Users\danie\Dropbox\E5\IOT\projects\MiotyWaffles\MiotyWaffles\miotywaffles\doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\miotywaffles.dsn"
+         "Argon")
+      (Path "Design Resources"
+         "C:\Users\danie\Dropbox\E5\IOT\projects\MiotyWaffles\MiotyWaffles\miotywaffles\doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\miotywaffles.dsn"
+         "RGB_Color_Sensor")
+      (Path "Design Resources" "Library"))
+    (HierarchyView)
+    (Doc
+      (Type "COrCapturePMDoc")
+      (Frame
+        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 420"))
+      (Tab 0))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 563")
+        (Scroll "-354 0")
+        (Zoom "63")
+        (Occurrence "/"))
+      (Path
+         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
+      (Schematic "Top")
+      (Page "BlockDiagram"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 667")
+        (Scroll "-354 0")
+        (Zoom "63")
+        (Occurrence "/Sensors"))
+      (Path
+         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
+      (Schematic "RGB_Color_Sensor")
+      (Page "PAGE1"))))
