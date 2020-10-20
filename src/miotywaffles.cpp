@@ -91,7 +91,7 @@ void miotyWaffles()
 
     if (rgbSensorConnected)
     {
-        Log.info("%s RGB Sensor Initialized %d", Time.timeStr().c_str(), rgb._deviceID);
+        Log.info("%s RGB Sensor Initialized %d", Time.timeStr().c_str(), rgb.deviceID);
         delay(1000);
     }
     else
@@ -104,7 +104,7 @@ void miotyWaffles()
 
     Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
     Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
-             rgb._redValue, rgb._greenValue, rgb._redValue - rgb._greenValue);
+             rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
 
     int timeout = 0;
     while (RgbColor != Red)
@@ -114,7 +114,7 @@ void miotyWaffles()
         RgbColor = rgb.getColor();
         Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
         Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
-                 rgb._redValue, rgb._greenValue, rgb._redValue - rgb._greenValue);
+                 rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
 
         if (timeout > 10 && RgbColor != Green)
         {
