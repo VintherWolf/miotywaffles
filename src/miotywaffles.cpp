@@ -160,14 +160,15 @@ void miotyWaffles()
     }
     Log.info("%s Music Should Change About Now!", Time.timeStr().c_str());
 
-    // TO-DO: Wait for WaffleIron Lid to open and close again
-    while (lidIsOpen())
+    // Wait for WaffleIron Lid to open:
+    while (!lidIsOpen())
     {
         delay(1000);
     }
     Log.info("%s Lid was Opened!", Time.timeStr().c_str());
 
-    while (!lidIsOpen())
+    // Wait for WaffleIron Lid to close:
+    while (lidIsOpen())
     {
         delay(1000);
     }
