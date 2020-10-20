@@ -140,30 +140,21 @@
   (GlobalState
     (FileView
       (Path "Design Resources")
-      (Path "Design Resources"
-         "C:\Users\danie\Dropbox\E5\IOT\projects\MiotyWaffles\MiotyWaffles\miotywaffles\doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\miotywaffles.dsn")
-      (Path "Design Resources"
-         "C:\Users\danie\Dropbox\E5\IOT\projects\MiotyWaffles\MiotyWaffles\miotywaffles\doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\miotywaffles.dsn"
-         "Top")
-      (Path "Design Resources"
-         "C:\Users\danie\Dropbox\E5\IOT\projects\MiotyWaffles\MiotyWaffles\miotywaffles\doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\miotywaffles.dsn"
-         "Argon")
-      (Path "Design Resources"
-         "C:\Users\danie\Dropbox\E5\IOT\projects\MiotyWaffles\MiotyWaffles\miotywaffles\doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\miotywaffles.dsn"
-         "RGB_Color_Sensor")
-      (Path "Design Resources" "Library"))
+      (Path "Design Resources" "Library")
+      (Select "Design Resources"
+         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03 diagrammer\hardware - electrical schematic\miotywaffles.dsn"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 420"))
+        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 420"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 563")
-        (Scroll "-354 0")
-        (Zoom "63")
+        (Scroll "0 615")
+        (Zoom "126")
         (Occurrence "/"))
       (Path
          "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
@@ -172,11 +163,22 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 208 1844 208 667")
-        (Scroll "-319 -7")
-        (Zoom "63")
+        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 667")
+        (Scroll "0 0")
+        (Zoom "126")
         (Occurrence "/Sensors"))
       (Path
          "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
       (Schematic "RGB_Color_Sensor")
+      (Page "PAGE1"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 563")
+        (Scroll "-92 10")
+        (Zoom "100")
+        (Occurrence "/IoT Device"))
+      (Path
+         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
+      (Schematic "Argon")
       (Page "PAGE1"))))
