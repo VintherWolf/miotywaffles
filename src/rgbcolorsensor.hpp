@@ -41,9 +41,9 @@ class RgbColorSensor
 
 public:
     /* Attributes */
-    int _deviceID;
-    int _redValue;
-    int _greenValue;
+    int deviceID;
+    int redValue;
+    int greenValue;
     /* Methods */
     RgbColorSensor();
     ~RgbColorSensor();

@@ -19,8 +19,6 @@ class SonosControl
 {
 public:
     /* Attributes */
-    const String _event = "waffleiron_sonos";
-    const String _states[3] = {"heating", "ready", "baking"};
 
     /* Methods */
     SonosControl();
@@ -31,6 +29,8 @@ public:
 
 private:
     /* Attributes */
+    const String _event = "waffleiron_sonos";
+    const String _states[3] = {"heating", "ready", "baking"};
     bool _connectedToCloud;
     bool _publishToCloudSuccess;
 };

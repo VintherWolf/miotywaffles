@@ -156,7 +156,7 @@
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 420"))
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 420"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
@@ -172,8 +172,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 667")
-        (Scroll "-354 0")
+        (Placement "44 2 3 -1 -1 -8 -31 208 1844 208 667")
+        (Scroll "-319 -7")
         (Zoom "63")
         (Occurrence "/Sensors"))
       (Path

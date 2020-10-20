@@ -36,8 +36,9 @@ int RgbColor = 0;
 //time_t time = Time.now();
 //Time.format(time, TIME_FORMAT_ISO8601_FULL);
 
-// Forward Definition
+// Forward Definitions
 void miotyWaffles();
+bool isLidClosed();
 
 /***********************************************************************
  *  @brief setup() runs once when the device is first turned on.
@@ -45,6 +46,10 @@ void miotyWaffles();
 void setup()
 {
     delay(10000);
+    // Pins (refer to pinsettings.h):
+    pinMode(ANGLE_SENSOR, INPUT);
+    pinMode(TOUCH_SENSOR, INPUT);
+
     /**
     *=======================================================
     * Process Start, Setting up 
@@ -154,9 +159,19 @@ void miotyWaffles()
         // Buzzer ->> Beep Beep
     }
     Log.info("%s Music Should Change About Now!", Time.timeStr().c_str());
+
     // TO-DO: Wait for WaffleIron Lid to open and close again
-    // Fast Paced delay to simulate Waffleiron
-    delay(60000);
+    while (lidIsOpen())
+    {
+        delay(1000);
+    }
+    Log.info("%s Lid was Opened!", Time.timeStr().c_str());
+
+    while (!lidIsOpen())
+    {
+        delay(1000);
+    }
+    Log.info("%s Lid was Closed!", Time.timeStr().c_str());
     /**
     *=======================================================
     * STATE: Baking
@@ -183,4 +198,19 @@ void miotyWaffles()
     delay(60000);
     Log.info("%s All Done! Have an Enjoyable Day!", Time.timeStr().c_str());
     EXIT_SUCCESS;
+}
+
+bool lidIsOpen()
+{
+    if (digitalRead(ANGLE_SENSOR) == LOW)
+    {
+        // Lid is OPENED when input is LOW
+        // Refer to Electrical Diagram
+        return true;
+    }
+
+    else
+    {
+        return false;
+    }
 }
