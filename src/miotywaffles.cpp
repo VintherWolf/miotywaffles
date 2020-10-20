@@ -38,7 +38,7 @@ int RgbColor = 0;
 
 // Forward Definitions
 void miotyWaffles();
-bool isLidClosed();
+bool lidIsOpen();
 
 /***********************************************************************
  *  @brief setup() runs once when the device is first turned on.
