@@ -49,8 +49,8 @@ bool RgbColorSensor::sensorConnected()
     Wire.endTransmission();
 
     Wire.requestFrom(RGB_SENSOR_ADDR, 1);
-    this->_deviceID = (int)Wire.read();
-    if (this->_deviceID == int(0x44))
+    this->deviceID = (int)Wire.read();
+    if (this->deviceID == int(0x44))
     {
         return true;
     }
@@ -66,7 +66,7 @@ int RgbColorSensor::getColor()
     int diff = 0;
     this->getColorValue();
 
-    diff = this->_redValue - this->_greenValue;
+    diff = this->redValue - this->greenValue;
 
     // diff: Negative => Green is dominant,
     //       Positive => Red is dominant
@@ -100,12 +100,12 @@ int RgbColorSensor::getColorValue()
     Wire.write(COMMAND_REG | RED_LOW);
     Wire.endTransmission();
     Wire.requestFrom(RGB_SENSOR_ADDR, 2);
-    this->_redValue = (int)Wire.read();
+    this->redValue = (int)Wire.read();
 
     /* Get Green Value */
     Wire.beginTransmission(WireTransmission(RGB_SENSOR_ADDR).timeout(200ms));
     Wire.write(COMMAND_REG | GREEN_LOW);
     Wire.endTransmission();
     Wire.requestFrom(RGB_SENSOR_ADDR, 2);
-    this->_greenValue = (int)Wire.read();
+    this->greenValue = (int)Wire.read();
 }

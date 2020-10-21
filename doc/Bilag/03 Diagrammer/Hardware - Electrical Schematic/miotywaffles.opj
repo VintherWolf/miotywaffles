@@ -147,7 +147,7 @@
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 420"))
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 420"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
@@ -164,7 +164,7 @@
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 667")
-        (Scroll "0 0")
+        (Scroll "0 615")
         (Zoom "126")
         (Occurrence "/Sensors"))
       (Path
@@ -174,8 +174,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 563")
-        (Scroll "-92 10")
+        (Placement "44 2 3 -1 -1 -8 -31 104 1740 104 563")
+        (Scroll "-203 0")
         (Zoom "100")
         (Occurrence "/IoT Device"))
       (Path

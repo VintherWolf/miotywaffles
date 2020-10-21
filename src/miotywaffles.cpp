@@ -16,6 +16,8 @@
 #include "sonos.hpp"
 #include "rgbcolorsensor.hpp"
 
+#define TIME_LIMIT 12
+
 /**
 *=======================================================
 * Initialization of Shared Variables
@@ -32,10 +34,6 @@ RgbColorSensor rgb;
 bool rgbSensorConnected = false;
 int RgbColor = 0;
 
-// Time Logging
-//time_t time = Time.now();
-//Time.format(time, TIME_FORMAT_ISO8601_FULL);
-
 // Forward Definitions
 void miotyWaffles();
 bool lidIsOpen();
@@ -46,7 +44,7 @@ bool lidIsOpen();
 void setup()
 {
     delay(10000);
-    // Pins (refer to pinsettings.h):
+    // Initialize Pinsettings (refer to pinsettings.h for pinout):
     pinMode(ANGLE_SENSOR, INPUT);
     pinMode(TOUCH_SENSOR, INPUT);
 
@@ -77,7 +75,6 @@ void setup()
  ***********************************************************************/
 void loop()
 {
-
     //
 }
 
@@ -86,9 +83,8 @@ void miotyWaffles()
     delay(20000);
     // TO-DO: Enable Waffle Iron by turning Relay On
 
-    // Verify Waffle Iron turned ON (LED = Orange)
+    // Initialize RGB Sensor
     rgbSensorConnected = rgb.sensorConnected();
-
     if (rgbSensorConnected)
     {
         Log.info("%s RGB Sensor Initialized %d", Time.timeStr().c_str(), rgb.deviceID);
@@ -97,29 +93,33 @@ void miotyWaffles()
     else
     {
         Log.info("%s RGB SENSOR NOT PRESENT", Time.timeStr().c_str());
-        EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
+    // Check Color of WaffleIron LED
     RgbColor = rgb.getColor();
-
     Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
     Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
              rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
 
-    int timeout = 0;
+    // Wait for LED to be Red/Orange
+    int elapsedTime = 0;
     while (RgbColor != Red)
     {
-        ++timeout;
+        ++elapsedTime;
         delay(5000);
+
+        // Check Color of WaffleIron LED
         RgbColor = rgb.getColor();
         Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
         Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
                  rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
 
-        if (timeout > 10 && RgbColor != Green)
+        // Exit if LED is not RED/Orange within Time_limit
+        if (elapsedTime >= TIME_LIMIT)
         {
             Log.info("Waffle Iron is not powered ON!");
-            EXIT_FAILURE;
+            exit(EXIT_FAILURE);
         }
     }
 
@@ -130,6 +130,7 @@ void miotyWaffles()
     **/
     Log.info("%s State is now: Heating", Time.timeStr().c_str());
 
+    // Change Track on Sonos System
     if (!sc.SonosPlay("heating"))
     {
         Log.info("%s Connection Lost: Music cannot play!",
@@ -152,6 +153,7 @@ void miotyWaffles()
     **/
     Log.info("%s State is now: Ready", Time.timeStr().c_str());
 
+    // Change Track on Sonos System
     if (!sc.SonosPlay("ready"))
     {
         Log.info("%s Connection Lost: Music cannot play!",
@@ -181,6 +183,8 @@ void miotyWaffles()
     Log.info("%s State is now: Baking", Time.timeStr().c_str());
     // TO-DO: Set timer to x minutes y seconds
     // Fast Paced delay to simulate Waffleiron
+
+    // Change Track on Sonos System
     if (!sc.SonosPlay("baking"))
     {
         Log.info("%s Connection Lost: Music cannot play!",
@@ -198,7 +202,7 @@ void miotyWaffles()
 
     delay(60000);
     Log.info("%s All Done! Have an Enjoyable Day!", Time.timeStr().c_str());
-    EXIT_SUCCESS;
+    exit(EXIT_SUCCESS);
 }
 
 bool lidIsOpen()
