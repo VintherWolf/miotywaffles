@@ -9,6 +9,7 @@ photon_firmware*
 # Prerequisites
 *.d
 
+
 # Compiled Object files
 *.slo
 *.lo
@@ -61,4 +62,5 @@ photon_firmware*
 /doc/Bilag/03 Diagrammer/Hardware - Electrical Schematic/*sim
 
 *CapOutput.ps
+*.crswap
 
