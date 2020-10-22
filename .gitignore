@@ -64,3 +64,5 @@ photon_firmware*
 *CapOutput.ps
 *.crswap
 
+# Do not include Weather API Key
+OWM_API_key.h
