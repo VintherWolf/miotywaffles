@@ -35,7 +35,7 @@
 //const int <DESCRIPTION> = D8;
 
 // 8        D7 (on-board blue LED)
-//const int BLUE_LED = D7;
+const int BLUE_LED = D7;
 
 // 7        D6
 //const int <DESCRIPTION> = D6;

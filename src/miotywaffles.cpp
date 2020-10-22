@@ -34,20 +34,26 @@ RgbColorSensor rgb;
 bool rgbSensorConnected = false;
 int RgbColor = 0;
 
+// LEDS
+bool BlueLED = false;
+
 // Forward Definitions
 void miotyWaffles();
 bool lidIsOpen();
+bool toggleBlueLED(bool BlueLED);
 
 /***********************************************************************
  *  @brief setup() runs once when the device is first turned on.
  ***********************************************************************/
 void setup()
 {
+
     delay(10000);
     // Initialize Pinsettings (refer to pinsettings.h for pinout):
     pinMode(ANGLE_SENSOR, INPUT);
     pinMode(TOUCH_SENSOR, INPUT);
-
+    pinMode(BLUE_LED, OUTPUT);
+    BlueLED = toggleBlueLED(BlueLED);
     /**
     *=======================================================
     * Process Start, Setting up 
@@ -80,11 +86,14 @@ void loop()
 
 void miotyWaffles()
 {
+    BlueLED = toggleBlueLED(BlueLED);
+    int elapsedTime = 0;
     delay(20000);
     // TO-DO: Enable Waffle Iron by turning Relay On
-
+    BlueLED = toggleBlueLED(BlueLED);
     // Initialize RGB Sensor
     rgbSensorConnected = rgb.sensorConnected();
+
     if (rgbSensorConnected)
     {
         Log.info("%s RGB Sensor Initialized %d", Time.timeStr().c_str(), rgb.deviceID);
@@ -103,7 +112,7 @@ void miotyWaffles()
              rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
 
     // Wait for LED to be Red/Orange
-    int elapsedTime = 0;
+
     while (RgbColor != Red)
     {
         ++elapsedTime;
@@ -141,10 +150,21 @@ void miotyWaffles()
              Time.timeStr().c_str());
 
     // Wait for WaffleIron LED to be Green
+    elapsedTime = 0;
     while (RgbColor != Green)
     {
+        ++elapsedTime;
         RgbColor = rgb.getColor();
+        Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
+        Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
+                 rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
         delay(5000);
+        BlueLED = toggleBlueLED(BlueLED);
+        if (elapsedTime >= 60)
+        {
+            Log.info("Waffle Iron is not powered ON!");
+            exit(EXIT_FAILURE);
+        }
     }
     /**
     *=======================================================
@@ -165,6 +185,7 @@ void miotyWaffles()
     // Wait for WaffleIron Lid to open:
     while (!lidIsOpen())
     {
+        BlueLED = toggleBlueLED(BlueLED);
         delay(1000);
     }
     Log.info("%s Lid was Opened!", Time.timeStr().c_str());
@@ -172,7 +193,8 @@ void miotyWaffles()
     // Wait for WaffleIron Lid to close:
     while (lidIsOpen())
     {
-        delay(1000);
+        BlueLED = toggleBlueLED(BlueLED);
+        delay(3000);
     }
     Log.info("%s Lid was Closed!", Time.timeStr().c_str());
     /**
@@ -216,6 +238,20 @@ bool lidIsOpen()
 
     else
     {
+        return false;
+    }
+}
+
+bool toggleBlueLED(bool BlueLED)
+{
+    if (!BlueLED)
+    {
+        digitalWrite(BLUE_LED, HIGH);
+        return true;
+    }
+    else
+    {
+        digitalWrite(BLUE_LED, LOW);
         return false;
     }
 }

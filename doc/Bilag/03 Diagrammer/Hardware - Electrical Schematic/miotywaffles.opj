@@ -163,9 +163,9 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 667")
-        (Scroll "0 615")
-        (Zoom "126")
+        (Placement "44 2 3 -1 -1 -8 -31 208 1844 208 667")
+        (Scroll "324 1678")
+        (Zoom "252")
         (Occurrence "/Sensors"))
       (Path
          "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
@@ -174,8 +174,8 @@
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 104 1740 104 563")
-        (Scroll "-203 0")
+        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 563")
+        (Scroll "-92 10")
         (Zoom "100")
         (Occurrence "/IoT Device"))
       (Path
