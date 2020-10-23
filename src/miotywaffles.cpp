@@ -15,14 +15,21 @@
 #include "pinsettings.h"
 #include "sonos.hpp"
 #include "rgbcolorsensor.hpp"
+#include "weather.hpp"
 
 #define TIME_LIMIT 12
+// Set Baking time in Minutes
+#define SET_BAKING_TIME (5min)
+#define ONE_SHOT true
 
 /**
 *=======================================================
 * Initialization of Shared Variables
 *=======================================================
 **/
+// System Sleeps between program runs
+SystemSleepConfiguration config;
+
 // Log Handler
 SerialLogHandler logHandler;
 
@@ -42,6 +49,16 @@ void miotyWaffles();
 bool lidIsOpen();
 bool toggleBlueLED(bool BlueLED);
 
+void bakingIsDone();
+void stillBaking();
+
+void recievedWeatherReport(const char *event, const char *data);
+Weather weather;
+// Baking Timer (default time = 4min)
+
+Timer bakingTimer(20000, bakingIsDone, ONE_SHOT);
+Timer bakeWatchdogTimer(5000, stillBaking);
+bool doneBaking = false;
 /***********************************************************************
  *  @brief setup() runs once when the device is first turned on.
  ***********************************************************************/
@@ -54,6 +71,12 @@ void setup()
     pinMode(TOUCH_SENSOR, INPUT);
     pinMode(BLUE_LED, OUTPUT);
     BlueLED = toggleBlueLED(BlueLED);
+
+    // System Settings, set system sleep between runs
+    //config.mode(SystemSleepMode::STOP)
+    //    .gpio(TOUCH_SENSOR, RISING);
+    //System.sleep(config);
+
     /**
     *=======================================================
     * Process Start, Setting up 
@@ -73,7 +96,7 @@ void setup()
                  Time.timeStr().c_str());
     }
 
-    miotyWaffles();
+    Particle.subscribe("hook-response/miotywaffles_owm_report", recievedWeatherReport, MY_DEVICES);
 }
 
 /***********************************************************************
@@ -81,13 +104,17 @@ void setup()
  ***********************************************************************/
 void loop()
 {
-    //
+    // Sleeps until Touch Sensor is activated
+    //System.sleep(config);
+    miotyWaffles();
+    delay(10000);
 }
 
 void miotyWaffles()
 {
-    BlueLED = toggleBlueLED(BlueLED);
     int elapsedTime = 0;
+
+    BlueLED = toggleBlueLED(BlueLED);
     delay(20000);
     // TO-DO: Enable Waffle Iron by turning Relay On
     BlueLED = toggleBlueLED(BlueLED);
@@ -101,25 +128,21 @@ void miotyWaffles()
     }
     else
     {
-        Log.info("%s RGB SENSOR NOT PRESENT", Time.timeStr().c_str());
+        Log.error("%s RGB SENSOR NOT PRESENT", Time.timeStr().c_str());
         exit(EXIT_FAILURE);
     }
 
-    // Check Color of WaffleIron LED
-    RgbColor = rgb.getColor();
-    Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
-    Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
-             rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
+    Log.info("%s Get Weather Report", Time.timeStr().c_str());
+
+    delay(100);
+    weather.getWeatherReport();
 
     // Wait for LED to be Red/Orange
-
-    while (RgbColor != Red)
+    while ((RgbColor = rgb.getColor()) != Red)
     {
         ++elapsedTime;
         delay(5000);
 
-        // Check Color of WaffleIron LED
-        RgbColor = rgb.getColor();
         Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
         Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
                  rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
@@ -127,8 +150,8 @@ void miotyWaffles()
         // Exit if LED is not RED/Orange within Time_limit
         if (elapsedTime >= TIME_LIMIT)
         {
-            Log.info("Waffle Iron is not powered ON!");
-            exit(EXIT_FAILURE);
+            Log.error("Waffle Iron is not powered ON!");
+            return;
         }
     }
 
@@ -142,7 +165,7 @@ void miotyWaffles()
     // Change Track on Sonos System
     if (!sc.SonosPlay("heating"))
     {
-        Log.info("%s Connection Lost: Music cannot play!",
+        Log.warn("%s Connection Lost: Music cannot play!",
                  Time.timeStr().c_str());
         // TO-DO: Buzzer ->> Beep Beep
     }
@@ -163,7 +186,7 @@ void miotyWaffles()
         if (elapsedTime >= 60)
         {
             Log.info("Waffle Iron is not powered ON!");
-            exit(EXIT_FAILURE);
+            return;
         }
     }
     /**
@@ -176,7 +199,7 @@ void miotyWaffles()
     // Change Track on Sonos System
     if (!sc.SonosPlay("ready"))
     {
-        Log.info("%s Connection Lost: Music cannot play!",
+        Log.warn("%s Connection Lost: Music cannot play!",
                  Time.timeStr().c_str());
         // Buzzer ->> Beep Beep
     }
@@ -203,26 +226,32 @@ void miotyWaffles()
     *=======================================================
     **/
     Log.info("%s State is now: Baking", Time.timeStr().c_str());
-    // TO-DO: Set timer to x minutes y seconds
+
+    // Start Baking timer/
+    //bakingTimer.changePeriod(SET_BAKING_TIME);
+    bakeWatchdogTimer.start();
+    bakingTimer.start();
     // Fast Paced delay to simulate Waffleiron
 
     // Change Track on Sonos System
     if (!sc.SonosPlay("baking"))
     {
-        Log.info("%s Connection Lost: Music cannot play!",
+        Log.warn("%s Connection Lost: Music cannot play!",
                  Time.timeStr().c_str());
         // Buzzer ->> Beep Beep
     }
     Log.info("%s Music Should Change About Now!", Time.timeStr().c_str());
-    // TO-DO: Wait for timer to run out
-    // Fast Paced delay to simulate Waffleiron
-    delay(10000);
+
+    while (!doneBaking)
+    {
+        // _nop
+    }
 
     // TO-DO: Turn off Relay
 
     // TO-DO: Check that Relay turned off (no LED light from waffleiron)
 
-    delay(60000);
+    delay(6000);
     Log.info("%s All Done! Have an Enjoyable Day!", Time.timeStr().c_str());
     exit(EXIT_SUCCESS);
 }
@@ -254,4 +283,22 @@ bool toggleBlueLED(bool BlueLED)
         digitalWrite(BLUE_LED, LOW);
         return false;
     }
+}
+
+void bakingIsDone()
+{
+    Log.info("%s Baking Timer Ran out", Time.timeStr().c_str());
+    doneBaking = true;
+}
+
+void stillBaking()
+{
+    Log.info("%s Still baking", Time.timeStr().c_str());
+    BlueLED = toggleBlueLED(BlueLED);
+}
+
+void recievedWeatherReport(const char *event, const char *data)
+{
+    //
+    weather.evaluateReport(data);
 }

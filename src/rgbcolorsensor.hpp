@@ -27,7 +27,7 @@
 #define GREEN_LOW (0x18)
 #define GREEN_HIGH (0x19)
 
-#define COLOR_HYSTERESIS 25
+#define COLOR_HYSTERESIS 20
 
 enum Colors_t
 {
