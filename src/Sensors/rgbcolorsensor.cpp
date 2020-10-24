@@ -3,7 +3,7 @@
  * Source File	: 	rgbcolorsensor.cpp
  * Author		: 	Daniel K. Vinther Wolf 
  * Created		:	20201009
- * Version		:	0.1.0
+ * Version		:	0.1.1
  * 
  * Description	:	I2C Communication with the RGB Color Sensor
  *
@@ -14,7 +14,6 @@
 
 RgbColorSensor::RgbColorSensor()
 {
-
     Colors_t colors = noChange;
 
     // From Particle.h, set up I2C:
@@ -35,14 +34,16 @@ RgbColorSensor::~RgbColorSensor()
 
 void RgbColorSensor::initSensor()
 {
-
     Wire.beginTransmission(WireTransmission(RGB_SENSOR_ADDR).timeout(200ms));
     Wire.write(COMMAND_REG);
     // Write data: 0x03 to enable internal clock, gain=0, etc.
     Wire.write(DATA_RGB_SENSOR_ENABLE);
     Wire.endTransmission();
+
+    this->_isConnected = false;
 }
-bool RgbColorSensor::sensorConnected()
+
+bool RgbColorSensor::sensorIsConnected()
 {
     Wire.beginTransmission(WireTransmission(RGB_SENSOR_ADDR).timeout(200ms));
     Wire.write(COMMAND_REG | DEVICE_ID);
@@ -52,12 +53,13 @@ bool RgbColorSensor::sensorConnected()
     this->deviceID = (int)Wire.read();
     if (this->deviceID == int(0x44))
     {
-        return true;
+        this->_isConnected = true;
     }
     else
     {
-        return false;
+        this->_isConnected = false;
     }
+    return this->_isConnected;
     // Device ID 0x44 in SubAddress 0xB2, return true:
 }
 
@@ -70,22 +72,22 @@ int RgbColorSensor::getColor()
 
     // diff: Negative => Green is dominant,
     //       Positive => Red is dominant
-    //       Diff shall be 25 or more to change color (hysteresis)
     if (diff > COLOR_HYSTERESIS)
     {
         // Red is dominant
-        return Red;
+        this->_currentColor = Red;
     }
     else if (diff < -COLOR_HYSTERESIS)
     {
         // Green is dominant
-        return Green;
+        this->_currentColor = Green;
     }
     else
     {
         // No dominant color
-        return noChange;
+        this->_currentColor = noChange;
     }
+    return this->_currentColor;
 }
 
 int RgbColorSensor::getColorValue()

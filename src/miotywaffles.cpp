@@ -12,10 +12,19 @@
 
 #include "Particle.h"
 
-#include "pinsettings.h"
-#include "sonos.hpp"
-#include "rgbcolorsensor.hpp"
-#include "weather.hpp"
+// Settings:
+#include "./Settings/pinsettings.h"
+#include "./Settings/argoncustomfunctions.h"
+
+// Sensors:
+#include "./Sensors/rgbcolorsensor.hpp"
+#include "./Sensors/anglesensor.hpp"
+// Actuators:
+//#include "./Actuators/<>.hpp"
+
+// Web Services:
+#include "./WebServices/weather.hpp"
+#include "./WebServices/sonos.hpp"
 
 #define TIME_LIMIT 12
 // Set Baking time in Minutes
@@ -38,7 +47,6 @@ SonosControl sc;
 
 // RGB Color Sensor
 RgbColorSensor rgb;
-bool rgbSensorConnected = false;
 int RgbColor = 0;
 
 // LEDS
@@ -46,16 +54,16 @@ bool BlueLED = false;
 
 // Forward Definitions
 void miotyWaffles();
-bool lidIsOpen();
-bool toggleBlueLED(bool BlueLED);
 
+// Events:
+void recievedWeatherReport(const char *event, const char *data);
+
+// Open Weather Map WebService:
+Weather weather;
+
+// Baking and "baking watchdog" Timer setup:
 void bakingIsDone();
 void stillBaking();
-
-void recievedWeatherReport(const char *event, const char *data);
-Weather weather;
-// Baking Timer (default time = 4min)
-
 Timer bakingTimer(20000, bakingIsDone, ONE_SHOT);
 Timer bakeWatchdogTimer(5000, stillBaking);
 bool doneBaking = false;
@@ -64,8 +72,6 @@ bool doneBaking = false;
  ***********************************************************************/
 void setup()
 {
-
-    delay(10000);
     // Initialize Pinsettings (refer to pinsettings.h for pinout):
     pinMode(ANGLE_SENSOR, INPUT);
     pinMode(TOUCH_SENSOR, INPUT);
@@ -119,9 +125,8 @@ void miotyWaffles()
     // TO-DO: Enable Waffle Iron by turning Relay On
     BlueLED = toggleBlueLED(BlueLED);
     // Initialize RGB Sensor
-    rgbSensorConnected = rgb.sensorConnected();
 
-    if (rgbSensorConnected)
+    if (rgb.sensorIsConnected())
     {
         Log.info("%s RGB Sensor Initialized %d", Time.timeStr().c_str(), rgb.deviceID);
         delay(1000);
@@ -138,7 +143,7 @@ void miotyWaffles()
     weather.getWeatherReport();
 
     // Wait for LED to be Red/Orange
-    while ((RgbColor = rgb.getColor()) != Red)
+    while (rgb.getColor() != Red)
     {
         ++elapsedTime;
         delay(5000);
@@ -174,10 +179,9 @@ void miotyWaffles()
 
     // Wait for WaffleIron LED to be Green
     elapsedTime = 0;
-    while (RgbColor != Green)
+    while (rgb.getColor() != Green)
     {
         ++elapsedTime;
-        RgbColor = rgb.getColor();
         Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
         Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
                  rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
@@ -244,7 +248,8 @@ void miotyWaffles()
 
     while (!doneBaking)
     {
-        // _nop
+        // wait for baking timer to run out
+        delay(10);
     }
 
     // TO-DO: Turn off Relay
@@ -253,36 +258,7 @@ void miotyWaffles()
 
     delay(6000);
     Log.info("%s All Done! Have an Enjoyable Day!", Time.timeStr().c_str());
-    exit(EXIT_SUCCESS);
-}
-
-bool lidIsOpen()
-{
-    if (digitalRead(ANGLE_SENSOR) == LOW)
-    {
-        // Lid is OPENED when input is LOW
-        // Refer to Electrical Diagram
-        return true;
-    }
-
-    else
-    {
-        return false;
-    }
-}
-
-bool toggleBlueLED(bool BlueLED)
-{
-    if (!BlueLED)
-    {
-        digitalWrite(BLUE_LED, HIGH);
-        return true;
-    }
-    else
-    {
-        digitalWrite(BLUE_LED, LOW);
-        return false;
-    }
+    return;
 }
 
 void bakingIsDone()
@@ -299,6 +275,6 @@ void stillBaking()
 
 void recievedWeatherReport(const char *event, const char *data)
 {
-    //
+    // Check if it is Good or Bad Weather from OpenWeatherMap JSON Response
     weather.evaluateReport(data);
 }

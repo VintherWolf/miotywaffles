@@ -12,7 +12,7 @@
 
 #include "weather.hpp"
 #include "Particle.h"
-#include "OWM_API_key.h"
+#include "../Settings/OWM_API_key.h"
 
 Weather::Weather()
 {

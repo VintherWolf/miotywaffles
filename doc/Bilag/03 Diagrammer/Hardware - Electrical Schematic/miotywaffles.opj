@@ -164,7 +164,7 @@
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 2 3 -1 -1 -8 -31 208 1844 208 667")
-        (Scroll "324 1678")
+        (Scroll "594 203")
         (Zoom "252")
         (Occurrence "/Sensors"))
       (Path
@@ -175,7 +175,7 @@
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 563")
-        (Scroll "-92 10")
+        (Scroll "-92 0")
         (Zoom "100")
         (Occurrence "/IoT Device"))
       (Path

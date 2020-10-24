@@ -13,7 +13,8 @@
  *                   argon-v1.00-schematic.pdf"
  * 
  ******************************************************************************/
-
+#ifndef _PINSETTINGS_H
+#define _PINSETTINGS_H
 /**
  * @brief SIP-12 HEAD2 
  * 12x1 Header includes I2C, GPIO, SPI, PWM, VUSB (5V), EN, Li+ (Batt+)
@@ -96,3 +97,5 @@ const int ANGLE_SENSOR = D2;
 // Used: RGB Sensor (<100mA)
 
 // 1        Reset
+
+#endif

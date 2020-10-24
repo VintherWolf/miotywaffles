@@ -5,7 +5,8 @@
  * Created		:	20201009
  * Version		:	0.1.0
  * 
- * Description	:	I2C Communication with the RGB Color Sensor
+ * Description	:	I2C Communication with the RGB Color Sensor 
+ *                  (ADAfruit 1334)
  *
  * 
  ******************************************************************************/
@@ -47,11 +48,13 @@ public:
     /* Methods */
     RgbColorSensor();
     ~RgbColorSensor();
-    bool sensorConnected();
+    bool sensorIsConnected();
     int getColor();
 
 private:
     /* Attributes */
+    bool _isConnected;
+    int _currentColor;
 
     /* Methods */
     void initSensor();
