@@ -3,7 +3,7 @@
  * Source File	: 	miotywaffles.cpp
  * Author		: 	Daniel K. Vinther Wolf 
  * Created		:	20200917
- * Version		:	0.3.0
+ * Version		:	0.3.1
  * 
  * Description	:	MiotyWaffles
  * 
@@ -14,7 +14,6 @@
 
 // Settings:
 #include "./Settings/pinsettings.h"
-#include "./Settings/argoncustomfunctions.h"
 
 // Sensors:
 #include "./Sensors/rgbcolorsensor.hpp"
@@ -54,7 +53,9 @@ bool BlueLED = false;
 
 // Forward Definitions
 void miotyWaffles();
-
+bool toggleBlueLED(bool BlueLED);
+void goToSleepPattern();
+void wakeUpPattern();
 // Events:
 void recievedWeatherReport(const char *event, const char *data);
 
@@ -79,9 +80,8 @@ void setup()
     BlueLED = toggleBlueLED(BlueLED);
 
     // System Settings, set system sleep between runs
-    //config.mode(SystemSleepMode::STOP)
-    //    .gpio(TOUCH_SENSOR, RISING);
-    //System.sleep(config);
+    config.mode(SystemSleepMode::STOP)
+        .gpio(TOUCH_SENSOR, RISING);
 
     /**
     *=======================================================
@@ -111,7 +111,13 @@ void setup()
 void loop()
 {
     // Sleeps until Touch Sensor is activated
-    //System.sleep(config);
+    Log.info("%s Waiting for Touch Sensor Activation!",
+             Time.timeStr().c_str());
+    goToSleepPattern();
+    System.sleep(config);
+    wakeUpPattern();
+    Log.info("%s Touch Sensor Activated! Awake now",
+             Time.timeStr().c_str());
     miotyWaffles();
     delay(10000);
 }
@@ -277,4 +283,52 @@ void recievedWeatherReport(const char *event, const char *data)
 {
     // Check if it is Good or Bad Weather from OpenWeatherMap JSON Response
     weather.evaluateReport(data);
+}
+
+bool toggleBlueLED(bool BlueLED)
+{
+    if (!BlueLED)
+    {
+        digitalWrite(BLUE_LED, HIGH);
+        return true;
+    }
+    else
+    {
+        digitalWrite(BLUE_LED, LOW);
+        return false;
+    }
+}
+
+void goToSleepPattern()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            BlueLED = toggleBlueLED(BlueLED);
+            delay(150);
+        }
+        delay(300);
+    }
+    if (BlueLED)
+    {
+        BlueLED = toggleBlueLED(BlueLED);
+    }
+}
+
+void wakeUpPattern()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            BlueLED = toggleBlueLED(BlueLED);
+            delay(50);
+        }
+        delay(200);
+    }
+    if (BlueLED)
+    {
+        BlueLED = toggleBlueLED(BlueLED);
+    }
 }

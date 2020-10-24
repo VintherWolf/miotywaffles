@@ -35,6 +35,7 @@ public:
 
 private:
     String _apiKey;
+    String _goodWeather[3];
     bool _weatherIsGood;
 };
 

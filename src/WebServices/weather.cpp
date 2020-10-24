@@ -3,7 +3,7 @@
  * Source File	: 	weather.cpp
  * Author		: 	Daniel K. Vinther Wolf 
  * Created		:	20201023
- * Version		:	0.1.0
+ * Version		:	0.1.1
  * 
  * Description	:	OpenWeatherMap API
  * 
@@ -16,9 +16,15 @@
 
 Weather::Weather()
 {
-    // Setup
+    // Setup Current Weather Webhook data params
     this->city_name = "Aarhus";
     this->_apiKey = owmApiKey;
+
+    // List of possible labels for "good weather"
+    this->_goodWeather[0] = "clouds";
+    this->_goodWeather[1] = "clear";
+    this->_goodWeather[2] = "clear sky";
+
     this->_weatherIsGood = false;
 }
 
@@ -35,19 +41,18 @@ void Weather::getWeatherReport()
 void Weather::evaluateReport(const char *data)
 {
     Log.info("%s Received Weather Report", Time.timeStr().c_str());
-
-    String goodWeather[] = {"clouds",
-                            "clear",
-                            "clear sky"};
-
+    // Parse Received JSON-formated weather report
     JSONValue outerObj = JSONValue::parseCopy(data);
-    this->_weatherIsGood = false;
     JSONObjectIterator iter(outerObj);
+
+    // WeahterIsGood will be flipped, if evaluations deems it as good
+    this->_weatherIsGood = false;
     while (iter.next())
     {
         for (int i = 0; i < 3; i++)
         {
-            if (iter.name() == goodWeather[i])
+            // if headline for weather sound good, then weather is good
+            if (iter.name() == this->_goodWeather[i])
             {
                 Log.info("The Weather is good!");
                 this->_weatherIsGood = true;

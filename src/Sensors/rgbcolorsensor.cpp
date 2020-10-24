@@ -1,6 +1,6 @@
 /***************************************************************************/ /**
  * 
- * Source File	: 	rgbcolorsensor.cpp
+ * Source File	:   rgbcolorsensor.cpp
  * Author		: 	Daniel K. Vinther Wolf 
  * Created		:	20201009
  * Version		:	0.1.1

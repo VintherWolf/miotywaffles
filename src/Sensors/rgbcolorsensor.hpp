@@ -15,21 +15,26 @@
 #ifndef _RGBCOLORSENSOR_HPP_
 #define _RGBCOLORSENSOR_HPP_
 
+// Device Slave Address
 #define RGB_SENSOR_ADDR (0x29)
+
+// The following definitions are registers that are used:
 #define COMMAND_REG (0xA0)
-
-#define DATA_RGB_SENSOR_ENABLE (0x03) // SubAddress
-
+// Write 0x03 to Command register to initialize device (gain=0 etc.)
+#define DATA_RGB_SENSOR_ENABLE (0x03)
+// Register for Device ID:
 #define DEVICE_ID (0x12)
-
+// Registers for low and High byte values for Red color
 #define RED_LOW (0x16)
 #define RED_HIGH (0x17)
-
+// Registers for low and High byte values for green color
 #define GREEN_LOW (0x18)
 #define GREEN_HIGH (0x19)
-
+// Color hysteresis is used to enhance noise immunity to prevent it
+// from flipping between red and green due to noise. 
 #define COLOR_HYSTERESIS 20
 
+// Color states, where noChange is in the grey 'hysteresis area'
 enum Colors_t
 {
     noChange,
