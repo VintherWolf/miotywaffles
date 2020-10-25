@@ -78,7 +78,7 @@ const int ANGLE_SENSOR = D2;
 // 11       SCK (SPI)
 
 // 10       A5
-
+const int RELAY_WIRON = A5;
 // 9        A4
 
 // 8        A3

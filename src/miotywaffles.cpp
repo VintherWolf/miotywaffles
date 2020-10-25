@@ -25,7 +25,7 @@
 #include "./WebServices/weather.hpp"
 #include "./WebServices/sonos.hpp"
 
-#define TIME_LIMIT 12
+#define MAX_RETRIES 12
 // Set Baking time in Minutes
 #define SET_BAKING_TIME (5min)
 #define ONE_SHOT true
@@ -46,10 +46,6 @@ SonosControl sc;
 
 // RGB Color Sensor
 RgbColorSensor rgb;
-int RgbColor = 0;
-
-// LEDS
-bool BlueLED = false;
 
 // Forward Definitions
 void miotyWaffles();
@@ -75,9 +71,12 @@ void setup()
     // Initialize Pinsettings (refer to pinsettings.h for pinout):
     pinMode(ANGLE_SENSOR, INPUT);
     pinMode(TOUCH_SENSOR, INPUT);
+    // Waffle Iron Relay
+    pinMode(RELAY_WIRON, OUTPUT);
+    digitalWrite(RELAY_WIRON, LOW);
+    // Argon On-board Blue LED
     pinMode(BLUE_LED, OUTPUT);
     toggleLed(BLUE_LED);
-
     // Configure system to wake from sleep by Touch Sensor
     config.mode(SystemSleepMode::STOP)
         .gpio(TOUCH_SENSOR, RISING);
@@ -122,13 +121,9 @@ void loop()
  ***********************************************************************/
 void miotyWaffles()
 {
-    int elapsedTime = 0;
-
-    delay(20000);
-    // TO-DO: Enable Waffle Iron by turning Relay On
+    int retry = 0;
 
     // Initialize RGB Sensor
-
     if (rgb.sensorIsConnected())
     {
         Log.info("%s RGB Sensor Initialized %d", Time.timeStr().c_str(), rgb.deviceID);
@@ -141,24 +136,26 @@ void miotyWaffles()
     }
 
     Log.info("%s Get Weather Report", Time.timeStr().c_str());
-
-    delay(100);
     weather.getWeatherReport();
+
+    // Enable Waffle Iron by turning Relay On
+    digitalWrite(RELAY_WIRON, HIGH);
 
     // Wait for LED to be Red/Orange
     while (rgb.getColor() != Red)
     {
-        ++elapsedTime;
+        ++retry;
         delay(5000);
-
-        Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
+        toggleLed(BLUE_LED);
         Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
                  rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
 
-        // Exit if LED is not RED/Orange within Time_limit
-        if (elapsedTime >= TIME_LIMIT)
+        // Exit if LED is not RED/Orange within MAX_RETRIES
+        if (retry >= MAX_RETRIES)
         {
             Log.error("Waffle Iron is not powered ON!");
+            digitalWrite(RELAY_WIRON, LOW);
+            digitalWrite(BLUE_LED, LOW);
             return;
         }
     }
@@ -181,16 +178,15 @@ void miotyWaffles()
              Time.timeStr().c_str());
 
     // Wait for WaffleIron LED to be Green
-    elapsedTime = 0;
+    retry = 0;
     while (rgb.getColor() != Green)
     {
-        ++elapsedTime;
-        Log.info("%s Color is %d", Time.timeStr().c_str(), RgbColor);
+        ++retry;
         Log.info("%s Colors: Red=%d Green=%d Diff=%d", Time.timeStr().c_str(),
                  rgb.redValue, rgb.greenValue, rgb.redValue - rgb.greenValue);
         delay(5000);
         toggleLed(BLUE_LED);
-        if (elapsedTime >= 60)
+        if (retry >= 60)
         {
             Log.info("Waffle Iron is not powered ON!");
             return;
@@ -255,9 +251,20 @@ void miotyWaffles()
     }
 
     // TO-DO: Turn off Relay
-
+    digitalWrite(RELAY_WIRON, LOW);
     // TO-DO: Check that Relay turned off (no LED light from waffleiron)
-
+    delay(300);
+    if (!rgb.getColor() == noChange)
+    {
+        Log.warn("%s Tries to turn off Relay one more time!", Time.timeStr().c_str());
+        digitalWrite(RELAY_WIRON, LOW);
+        delay(1000);
+        if (!rgb.getColor() == noChange)
+        {
+            Log.error("%s Relay did not turn off!", Time.timeStr().c_str());
+            exit(EXIT_FAILURE);
+        }
+    }
     delay(2000);
     Log.info("%s All Done! Have an Enjoyable Day!", Time.timeStr().c_str());
     digitalWrite(BLUE_LED, LOW);
