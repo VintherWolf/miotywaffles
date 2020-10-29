@@ -15,3 +15,8 @@ A waffle iron is controlled from a Particle Argon IoT device.
 7. When a timer run out, then the relay is set Off, and a beep is sounded by the buzzer to signal that the waffles are done. (The timer settings are to be established)
 
 ![MiotyWaffels](https://github.com/VintherWolf/miotywaffles/blob/master/doc/Bilag/09_Media/MiotyWaffles_TechnicalRichPicture.jpg?raw=true)
+
+
+## Sequence Diagram
+
+![PlantUML SequenceDiagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/VintherWolf/miotywaffles/master/doc/Bilag/03%20Diagrammer/sd-miotywaffles.iuml)

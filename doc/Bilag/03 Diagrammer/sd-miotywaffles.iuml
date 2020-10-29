@@ -4,16 +4,20 @@ title MiotyWaffles sq diagram
 actor User
 User -> "Touch\n Sensor"
 "Touch\n Sensor" -> "IoT\n Device" : wakeUp
+activate "IoT\n Device"
 "IoT\n Device" -> "Relay" : setRelay(on)
+activate "Relay"
 "IoT\n Device" -> "Buzzer" : playWakeUp()
 "IoT\n Device" -> "RGB\n Color\n Sensor" : getColor()
-"IoT\n Device" <-- "RGB\n Color\n Sensor" : _currentColor
+activate "RGB\n Color\n Sensor"
+return : _currentColor
 "IoT\n Device" -> "IoT\n Device" : colorRed
 "IoT\n Device" -> "Weather\nAPI" : weatherReportEvent()
 "IoT\n Device" <-- "Weather\nAPI" : event(weatherReport)
 "IoT\n Device" -> "IFTTT\nSonos API" : playEvent(heating)
 "IoT\n Device" -> "RGB\n Color\n Sensor" : getColor()
-"IoT\n Device" <-- "RGB\n Color\n Sensor" : _currentColor
+activate "RGB\n Color\n Sensor"
+return : _currentColor
 "IoT\n Device" -> "IoT\n Device" : colorGreen
 "IoT\n Device" -> "IFTTT\nSonos API" : playEvent(ready)
 User -> "IoT\n Device" : openLid
@@ -26,5 +30,7 @@ User -> "IoT\n Device" : closeLid
 "IoT\n Device" -> "IFTTT\nSonos API" : playEvent(baking)
 "IoT\n Device" -> "IoT\n Device" : bakingTimer
 "IoT\n Device" -> "Relay" : setRelay(off)
+deactivate "Relay"
 "IoT\n Device" -> "Buzzer" : playDone()
+deactivate "IoT\n Device"
 @enduml
