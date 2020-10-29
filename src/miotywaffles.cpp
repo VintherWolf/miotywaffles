@@ -9,6 +9,23 @@
  * 
  */
 
+/*! \mainpage E5IOT E-2020, AU Herning, Daniel K. Vinther Wolf
+ *
+ * \section intro_sec Introduction
+ *
+ * This project is developed as part of the course Internet of Things,
+ * that is held at Aarhus University Campus Herning.
+ * The purpose is to make use of an IoT Device, that uses the following:
+ * * a Webhook that retrives a weather report for the device to make decisions
+ * * a Webhook that uses IFTTT to control Sonos API
+ * * local sensors and actuators to control a Waffle Iron
+ * 
+ * \section install_sec Installation
+ *
+ * \subsection step1 Step 1: Connect the components
+ * Refer to the Electrical Scehmatic and Part List
+ */
+
 #include "Particle.h"
 
 // Settings:
