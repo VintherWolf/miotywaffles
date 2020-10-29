@@ -82,7 +82,7 @@ const int RELAY_WIRON = A5;
 // 9        A4
 
 // 8        A3
-
+const int BUZPIN = A3;
 // 7        A2
 
 // 6        A1

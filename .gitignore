@@ -1,6 +1,6 @@
-# Photon Firmware
+# Firmware
 photon_firmware*
-
+argon_firmware*
 # Folders
 /.vscode
 /build

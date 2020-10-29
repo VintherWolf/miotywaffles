@@ -1,16 +1,19 @@
 /***************************************************************************/ /**
  * 
- * Source File	: 	anglesensor.hpp
+ * Source File	: 	anglesensor.h
  * Author		: 	Daniel K. Vinther Wolf 
  * Created		:	20201023
  * Version		:	0.1.0
  * 
- * Description	:	Angle Sensor Class
+ * Description	:	Angle Sensor
  *
  * 
  ******************************************************************************/
 #include "Particle.h"
 #include "../Settings/pinsettings.h"
+
+#ifndef _ANGLESENSOR_H_
+#define _ANGLESENSOR_H_
 
 /**
  * @brief Lid is OPENED when input (D2) is LOW (Refer to Electrical Diagram)
@@ -18,6 +21,11 @@
  * @return true 
  * @return false 
  */
+
+void initAngleSensor()
+{
+    pinMode(ANGLE_SENSOR, INPUT);
+}
 
 bool lidIsOpen()
 {
@@ -39,3 +47,5 @@ bool lidIsOpen()
         return false;
     }
 }
+
+#endif
