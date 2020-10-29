@@ -19,4 +19,4 @@ A waffle iron is controlled from a Particle Argon IoT device.
 
 ## Sequence Diagram
 
-![PlantUML SequenceDiagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/VintherWolf/miotywaffles/master/doc/Bilag/03%20Diagrammer/sd-miotywaffles.iuml)
+![PlantUML SequenceDiagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/VintherWolf/miotywaffles/master/doc/Bilag/03_Diagrammer/sd-miotywaffles.iuml)
