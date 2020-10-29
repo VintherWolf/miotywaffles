@@ -1,23 +1,30 @@
-/***************************************************************************/ /**
+/**
+ * @file relay.cpp
+ * @author Daniel K. Vinther Wolf
+ * @brief Control Mains Relay (on/off)
+ * @version 0.1
+ * @date 2020-10-27
  * 
- * Source File	: 	relay.c
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20201027
- * Version		:	0.1.0
  * 
- * Description	:	Relay
- *
- * 
- ******************************************************************************/
-#include "Particle.h"
+ */
 
+#include "Particle.h"
 #include "relay.h"
 
+/**
+ * @brief Initialize GPO for Relay
+ * 
+ */
 void initRelay()
 {
     pinMode(RELAY_WIRON, OUTPUT);
 }
 
+/**
+ * @brief Set the Relay on/off
+ * 
+ * @param command 
+ */
 void setRelay(String command)
 {
     command.toLowerCase();

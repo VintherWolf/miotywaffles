@@ -1,24 +1,20 @@
-/***************************************************************************/ /**
- * 
- * Source File	: 	weather.cpp
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20201023
- * Version		:	0.1.1
- * 
- * Description	:	OpenWeatherMap API
+/**
+ * @file weather.cpp
+ * @author Daniel K. Vinther Wolf
+ * @brief Use OpenWeatherMap API to retrive weather reports
+ * @version 0.1
+ * @date 2020-10-23
  * 
  * 
- ******************************************************************************/
+ */
 
 #include "weather.hpp"
 #include "Particle.h"
-#include "../Settings/OWM_API_key.h"
 
 Weather::Weather()
 {
     // Setup Current Weather Webhook data params
     this->city_name = "Aarhus";
-    this->_apiKey = owmApiKey;
 
     // List of possible labels for "good weather"
     this->_goodWeather[0] = "clouds";
@@ -33,11 +29,21 @@ Weather::~Weather()
     // Tear down
 }
 
+/**
+ * @brief Retrieve weather report for Aarhus
+ * 
+ */
 void Weather::getWeatherReport()
 {
     // The Response is obtained in receivedWeatherReport Event
     Particle.publish("miotywaffles_owm_report", this->city_name, PRIVATE);
 }
+
+/**
+ * @brief Parse weather report and check if weather is good or bad
+ * 
+ * @param data 
+ */
 void Weather::evaluateReport(const char *data)
 {
     Log.info("%s Received Weather Report", Time.timeStr().c_str());

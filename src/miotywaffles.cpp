@@ -1,14 +1,14 @@
-/***************************************************************************/ /**
+/**
+ * @file miotywaffles.cpp
+ * @author Daniel K. Vinther Wolf 
+ * @brief Main Application
+ * @version 0.1
+ * @date 2020-09-17
  * 
- * Source File	: 	miotywaffles.cpp
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20200917
- * Version		:	0.3.2
+ * @copyright Copyright (c) 2020
  * 
- * Description	:	MiotyWaffles
- * 
- * 
- ******************************************************************************/
+ */
+
 #include "Particle.h"
 
 // Settings:
@@ -23,15 +23,10 @@
 // Web Services:
 #include "./WebServices/weather.hpp"
 #include "./WebServices/sonos.hpp"
-#pragma region Constants
+
 /* Constants */
 // Max retries to see if Waffle Iron is powered on
 #define MAX_RETRIES 12
-
-// Set Baking time in Minutes and make it run only once
-#define SET_BAKING_TIME (5min)
-#define ONE_SHOT true
-#pragma endregion Constants
 
 #pragma region initialization
 /**
@@ -64,19 +59,27 @@ void recievedWeatherReport(const char *event, const char *data);
 // Open Weather Map WebService:
 Weather weather;
 
+#pragma region Baking timer settings
 // Baking and "baking watchdog" Timer setup:
+// Set Baking time in Minutes and make it run only once
+#define SET_BAKING_TIME (5min)
+#define ONE_SHOT true
+
 void bakingIsDone();
 void stillBaking();
+
 Timer bakingTimer(20000, bakingIsDone, ONE_SHOT);
 Timer bakeWatchdogTimer(5000, stillBaking);
 bool doneBaking = false;
+#pragma endregion Baking timer settings
 
 #pragma endregion init
 
 #pragma region setup()
-/***********************************************************************
- *  @brief setup() runs once when the device is first turned on.
- ***********************************************************************/
+/**
+ * @brief Runs once when the device is first turned on, but
+ * 
+ */
 void setup()
 {
     // Initialize Pinsettings (refer to pinsettings.h for pinout):
@@ -113,9 +116,10 @@ void setup()
 #pragma endregion setup()
 
 #pragma region loop()
-/***********************************************************************
- *  @brief loop() runs over and over again, as quickly as it can execute.
- ***********************************************************************/
+/**
+ * @brief Runs over and over again, as quickly as it can execute
+ * 
+ */
 void loop()
 {
     // Sleeps until Touch Sensor is activated
@@ -135,9 +139,11 @@ void loop()
 #pragma endregion loop()
 
 #pragma region MiotyWaffles(Application)
-/***********************************************************************
- *  @brief MiotyWaffles 
- ***********************************************************************/
+
+/**
+ * @brief MiotyWaffles application
+ * 
+ */
 void miotyWaffles()
 {
 #pragma region mioty init
@@ -301,7 +307,11 @@ void miotyWaffles()
 #pragma endregion MiotyWaffles(Application)
 
 #pragma region support functions and events
-// When baking timer runs out:
+
+/**
+ * @brief Run once when the baking timer runs out
+ * 
+ */
 void bakingIsDone()
 {
     Log.info("%s Baking Timer Ran out", Time.timeStr().c_str());
@@ -309,7 +319,10 @@ void bakingIsDone()
     bakingTimer.stop();
 }
 
-// Baking timer "watchdog" timer
+/**
+ * @brief runs every 5second when the baking timer runs
+ * 
+ */
 void stillBaking()
 {
     if (!doneBaking)
@@ -323,14 +336,22 @@ void stillBaking()
     }
 }
 
-// Subscribe to weather report response
+/**
+ * @brief Evaluates the received weather report
+ * 
+ * @param event miotywaffles_owm_report
+ * @param data JSON schema with current weather conditions for Aarhus
+ */
 void recievedWeatherReport(const char *event, const char *data)
 {
-    // Check if it is Good or Bad Weather from OpenWeatherMap JSON Response
     weather.evaluateReport(data);
 }
 
-// helper function to toggle a GPO pin
+/**
+ * @brief Read GPO pin and set the opposite state
+ * 
+ * @param pin GPO
+ */
 void toggleLed(uint16_t pin)
 
 {

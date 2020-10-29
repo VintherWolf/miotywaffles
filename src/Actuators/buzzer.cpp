@@ -1,14 +1,13 @@
-/***************************************************************************/ /**
+/**
+ * @file buzzer.cpp
+ * @author Daniel K. Vinther Wolf
+ * @brief play melodies using the buzzer
+ * @version 0.1
+ * @date 2020-10-27
  * 
- * Source File	: 	Buzzer.c
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20201027
- * Version		:	0.1.0
  * 
- * Description	:	Buzzer
- *
- * 
- ******************************************************************************/
+ */
+
 #include "Particle.h"
 #include "buzzer.hpp"
 
@@ -21,6 +20,11 @@ Buzzer::~Buzzer()
 {
 }
 
+/**
+ * @brief Execute 1kHz beep for x ms
+ * 
+ * @param ms 
+ */
 void Buzzer::beep(int ms)
 {
     tone(BUZPIN, 1000, ms);
@@ -28,6 +32,13 @@ void Buzzer::beep(int ms)
     noTone(BUZPIN);
 }
 
+/**
+ * @brief Class method to play melody
+ * 
+ * @param melody 
+ * @param noteDurations 
+ * @param tempo 
+ */
 void Buzzer::_playMelody(int melody[], int noteDurations[], int tempo)
 {
     for (int thisNote = 0; thisNote < this->_nodes; thisNote++)
@@ -45,6 +56,10 @@ void Buzzer::_playMelody(int melody[], int noteDurations[], int tempo)
     }
 }
 
+/**
+ * @brief Play Angry Birds Theme
+ * 
+ */
 void Buzzer::playAngryBirds()
 {
     // https://www.youtube.com/watch?v=B9iPJaDNuO4
@@ -82,6 +97,10 @@ void Buzzer::playAngryBirds()
     this->_playMelody(melody, noteDurations, tempo);
 }
 
+/**
+ * @brief Play super mario theme
+ * 
+ */
 void Buzzer::playSuperMario()
 {
     int tempo = 30;
@@ -129,6 +148,10 @@ void Buzzer::playSuperMario()
     this->_playMelody(melody, noteDurations, tempo);
 }
 
+/**
+ * @brief Play Error signal
+ * 
+ */
 void Buzzer::playError()
 {
     int tempo = 80;
@@ -149,6 +172,10 @@ void Buzzer::playError()
     this->_playMelody(melody, noteDurations, tempo);
 }
 
+/**
+ * @brief Play signal when IoT Device wakes up
+ * 
+ */
 void Buzzer::playWokeUp()
 {
     int tempo = 80;

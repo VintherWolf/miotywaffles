@@ -9,6 +9,9 @@ argon_firmware*
 # Prerequisites
 *.d
 
+# Doxygen
+/html
+/latex
 
 # Compiled Object files
 *.slo

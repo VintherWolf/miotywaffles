@@ -1,15 +1,14 @@
-/***************************************************************************/ /**
+/**
+ * @file rgbcolorsensor.hpp
+ * @author Daniel K. Vinther Wolf
+ * @brief RgbColorSensor
+ * @version 0.1
+ * @date 2020-10-09
  * 
- * Source File	: 	rgbcolorsensor.cpp
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20201009
- * Version		:	0.1.0
- * 
- * Description	:	I2C Communication with the RGB Color Sensor 
- *                  (ADAfruit 1334)
- *
- * 
- ******************************************************************************/
+ * Description: I2C Communication with the RGB Color Sensor
+ *      Device: Adafruit 1334
+ */
+
 #include "Particle.h"
 
 #ifndef _RGBCOLORSENSOR_HPP_
@@ -31,7 +30,7 @@
 #define GREEN_LOW (0x18)
 #define GREEN_HIGH (0x19)
 // Color hysteresis is used to enhance noise immunity to prevent it
-// from flipping between red and green due to noise. 
+// from flipping between red and green due to noise.
 #define COLOR_HYSTERESIS 20
 
 // Color states, where noChange is in the grey 'hysteresis area'

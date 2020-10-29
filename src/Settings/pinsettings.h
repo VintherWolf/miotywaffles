@@ -1,18 +1,20 @@
-/***************************************************************************/ /**
+/**
+ * @file pinsettings.h
+ * @author Daniel K. Vinther Wolf
+ * @brief Pinsettings as per 'Electrical Schematic'
+ * @version 0.1
+ * @date 2020-10-29
+ *  Device: Particle Argon
  * 
- * Source File	: 	pinsettings.h
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20200915
- * Version		:	0.1.0
+ *  MiotyWaflles Scehamtic:
+ *  Path: doc\Bilag\03 Diagrammer\Hardware - Electrical Schematic\
+ *  File: miotywaffles, Electrical Schematic.pdf
  * 
- * Description	:	This header file is used to keep track of the mapping of
- *                  pins on the associated IoT device "particle Argon".
- *                  I.e. this is a "FPGA master constraint file" equivalent
- *                  Visit argon schematic for more info:
- *                  "https://github.com/particle-iot/argon/blob/master/pdfs/
- *                   argon-v1.00-schematic.pdf"
- * 
- ******************************************************************************/
+ *  Visit argon schematic for more info:
+ *  https://github.com/particle-iot/argon/blob/master/pdfs/
+ *  argon-v1.00-schematic.pdf
+ */
+
 #ifndef _PINSETTINGS_H
 #define _PINSETTINGS_H
 /**

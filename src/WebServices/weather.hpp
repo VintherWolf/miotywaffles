@@ -1,14 +1,12 @@
-/***************************************************************************/ /**
+/**
+ * @file weather.hpp
+ * @author Daniel K. Vinther Wolf
+ * @brief Weather
+ * @version 0.1
+ * @date 2020-10-23
  * 
- * Source File	: 	weather.hpp
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20201023
- * Version		:	0.1.0
- * 
- * Description	:	OpenWeatherMap API
- * 
- * 
- ******************************************************************************/
+ * Use OpenWeatherMap API to retrive weather reports
+ */
 
 #include "Particle.h"
 

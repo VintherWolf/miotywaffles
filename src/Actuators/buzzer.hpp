@@ -1,14 +1,13 @@
-/***************************************************************************/ /**
+/**
+ * @file buzzer.hpp
+ * @author Daniel K. Vinther Wolf
+ * @brief Buzzer
+ * @version 0.1
+ * @date 2020-10-27
  * 
- * Source File	: 	buzzer.h
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20201027
- * Version		:	0.1.0
  * 
- * Description	:	Buzzer
- *
- * 
- ******************************************************************************/
+ */
+
 #include "Particle.h"
 #include "../Settings/pinsettings.h"
 

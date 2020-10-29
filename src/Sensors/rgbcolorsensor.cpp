@@ -1,14 +1,14 @@
-/***************************************************************************/ /**
+/**
+ * @file rgbcolorsensor.cpp
+ * @author Daniel K. Vinther Wolf
+ * @brief I2C Comm. with the RGB Color Sensor (Adafruit 1334)
+ * @version 0.1
+ * @date 2020-10-09
  * 
- * Source File	:   rgbcolorsensor.cpp
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20201009
- * Version		:	0.1.1
- * 
- * Description	:	I2C Communication with the RGB Color Sensor
- *
- * 
- ******************************************************************************/
+ * Description: I2C Communication with the RGB Color Sensor
+ *      Device: Adafruit 1334
+ */
+
 #include "Particle.h"
 #include "rgbcolorsensor.hpp"
 
@@ -32,6 +32,10 @@ RgbColorSensor::~RgbColorSensor()
     // do nothing
 }
 
+/**
+ * @brief Initialize Pin and setup RGB color sensor internal registers
+ * Run this to initialize the RGB color sensor with: gain=0
+ */
 void RgbColorSensor::initSensor()
 {
     Wire.beginTransmission(WireTransmission(RGB_SENSOR_ADDR).timeout(200ms));
@@ -43,6 +47,12 @@ void RgbColorSensor::initSensor()
     this->_isConnected = false;
 }
 
+/**
+ * @brief Check if RGB Color Sensor is connected by retrieving its Device ID
+ * 
+ * @return true 
+ * @return false 
+ */
 bool RgbColorSensor::sensorIsConnected()
 {
     Wire.beginTransmission(WireTransmission(RGB_SENSOR_ADDR).timeout(200ms));
@@ -63,6 +73,11 @@ bool RgbColorSensor::sensorIsConnected()
     // Device ID 0x44 in SubAddress 0xB2, return true:
 }
 
+/**
+ * @brief Evaluate if red or green value is highest from the sensor
+ *         
+ * @return int 
+ */
 int RgbColorSensor::getColor()
 {
     int diff = 0;
@@ -90,6 +105,11 @@ int RgbColorSensor::getColor()
     return this->_currentColor;
 }
 
+/**
+ * @brief Get the register value for green and red
+ * 
+ * @return int 
+ */
 int RgbColorSensor::getColorValue()
 {
     // Get green low + high = 2bytes:

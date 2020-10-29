@@ -1,14 +1,12 @@
-/***************************************************************************/ /**
+/**
+ * @file sonos.hpp
+ * @author Daniel K. Vinther Wolf
+ * @brief SonosControl
+ * @version 0.1
+ * @date 2020-09-23
  * 
- * Source File	: 	sonos.cpp
- * Author		: 	Daniel K. Vinther Wolf 
- * Created		:	20200923
- * Version		:	0.1.0
- * 
- * Description	:	Sonos API
- * 
- * 
- ******************************************************************************/
+ * IFTTT Sonos API
+ */
 
 #include "Particle.h"
 
