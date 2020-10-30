@@ -1,23 +1,34 @@
 @startuml
 header MiotyWaffles IoT Project
 title MiotyWaffles sq diagram
+
+participant "Touch\n Sensor" order 10
+participant "IoT\n Device" order 20
+participant "Buzzer" order 30
+participant "Relay" order 40
+participant "RGB\n Color\n Sensor" order 50
+participant "Angle\nSensor" order 60
+participant "Weather\nAPI" order 70
+participant "IFTTT\nSonos API" order 80
+
 actor User
 User -> "Touch\n Sensor"
 "Touch\n Sensor" -> "IoT\n Device" : wakeUp
 activate "IoT\n Device"
+
 "IoT\n Device" -> "Relay" : setRelay(on)
 activate "Relay"
 "IoT\n Device" -> "Buzzer" : playWakeUp()
 "IoT\n Device" -> "RGB\n Color\n Sensor" : getColor()
 activate "RGB\n Color\n Sensor"
-return : _currentColor
+return _currentColor
 "IoT\n Device" -> "IoT\n Device" : colorRed
 "IoT\n Device" -> "Weather\nAPI" : weatherReportEvent()
 "IoT\n Device" <-- "Weather\nAPI" : event(weatherReport)
 "IoT\n Device" -> "IFTTT\nSonos API" : playEvent(heating)
 "IoT\n Device" -> "RGB\n Color\n Sensor" : getColor()
 activate "RGB\n Color\n Sensor"
-return : _currentColor
+return _currentColor
 "IoT\n Device" -> "IoT\n Device" : colorGreen
 "IoT\n Device" -> "IFTTT\nSonos API" : playEvent(ready)
 User -> "IoT\n Device" : openLid
@@ -27,6 +38,7 @@ User -> "IoT\n Device" : putWaffleBatter
 User -> "IoT\n Device" : closeLid
 "IoT\n Device" -> "Angle\nSensor" : isLidOpen()
 "Angle\nSensor" --> "IoT\n Device" : false
+"IoT\n Device" -> "IoT\n Device" : evaluateWeather
 "IoT\n Device" -> "IFTTT\nSonos API" : playEvent(baking)
 "IoT\n Device" -> "IoT\n Device" : bakingTimer
 "IoT\n Device" -> "Relay" : setRelay(off)

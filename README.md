@@ -14,8 +14,8 @@ A waffle iron is controlled from a Particle Argon IoT device.
     - Weather is "bad": The music will be more soft eg. Jack johson - banana pancakes. 
 7. When a timer run out, then the relay is set Off, and a beep is sounded by the buzzer to signal that the waffles are done. (The timer settings are to be established)
 
-![MiotyWaffels](https://github.com/VintherWolf/miotywaffles/blob/master/doc/Bilag/09_Media/MiotyWaffles_TechnicalRichPicture.jpg?raw=true)
-
+## Block Diagram
+![MiotyWaffles_TechnicalRichPicture](https://user-images.githubusercontent.com/52383080/97689183-80e9ef80-1a9b-11eb-8c0f-039af9eb1d29.jpg)
 
 ## Sequence Diagram
 
