@@ -103,6 +103,7 @@ void setup()
     initAngleSensor();
     initTouchSensor();
     initRelay();
+    setRelay("off");
 
     // Argon On-board Blue LED
     pinMode(BLUE_LED, OUTPUT);
@@ -141,12 +142,15 @@ void loop()
 {
     // Sleeps until Touch Sensor is activated
     delay(5000);
-    buzzer.playAngryBirds();
+    buzzer.playWokeUp();
+    digitalWrite(BLUE_LED, LOW);
+    setRelay("off");
     Log.info("%s Goind to sleep! Activate touch sensor to wake up",
              Time.timeStr().c_str());
 
     System.sleep(config);
-    buzzer.playWokeUp();
+    toggleLed(BLUE_LED);
+    buzzer.playAngryBirds();
     Log.info("%s Touch Sensor Activated! Awake now",
              Time.timeStr().c_str());
 
@@ -164,8 +168,7 @@ void loop()
 void miotyWaffles()
 {
 #pragma region mioty init
-    int retry = 0;
-    delay(10000);
+
     // Initialize RGB Sensor
     if (rgb.sensorIsConnected())
     {
@@ -183,9 +186,10 @@ void miotyWaffles()
 
     // Enable Waffle Iron by turning Relay On
     setRelay("on");
-    delay(2000);
 
     // Wait for LED to be Red/Orange
+    int retry = 0;
+    delay(200);
     while (rgb.getColor() != Red)
     {
         ++retry;
@@ -198,8 +202,8 @@ void miotyWaffles()
         if (retry >= MAX_RETRIES)
         {
             Log.error("Waffle Iron is not powered ON!");
-            digitalWrite(RELAY_WIRON, LOW);
             digitalWrite(BLUE_LED, LOW);
+            setRelay("off");
             return;
         }
     }
@@ -234,6 +238,7 @@ void miotyWaffles()
         if (retry >= 60)
         {
             Log.error("Took too long to heat up!");
+            setRelay("off");
             return;
         }
     }

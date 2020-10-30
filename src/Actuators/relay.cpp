@@ -18,6 +18,7 @@
 void initRelay()
 {
     pinMode(RELAY_WIRON, OUTPUT);
+    digitalWrite(RELAY_WIRON, LOW);
 }
 
 /**

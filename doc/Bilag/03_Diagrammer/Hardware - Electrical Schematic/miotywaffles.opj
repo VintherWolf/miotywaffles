@@ -29,6 +29,8 @@
            "..\..\..\..\..\..\..\..\..\..\..\..\..\cadence\spb_17.2\tools\capture\library\pspice\special.olb")
         (Type "Schematic Library"))
       (File ".\rgb_sensor.olb"
+        (Type "Schematic Library"))
+      (File "C:\Users\danie\OneDrive\Skrivebord\LIBRARY1.OLB"
         (Type "Schematic Library")))
     (NoModify)
     (File ".\miotywaffles.dsn"
@@ -64,6 +66,21 @@
     (Folder "Simulation Profiles"))
   (DefaultLibraryBrowseDirectory "library\PSpice")
   (PartMRUSelector
+    (touchsensor
+      (FullPartName "touchsensor.Normal")
+      (LibraryName "C:\USERS\DANIE\ONEDRIVE\SKRIVEBORD\LIBRARY1.OLB")
+      (DeviceIndex "0"))
+    ("CAP NP"
+      (FullPartName "CAP NP.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
+      (DeviceIndex "0"))
+    (MC35181
+      (FullPartName "MC35181.Normal")
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\OPAMP.OLB")
+      (DeviceIndex "0"))
+    (PORTLEFT-R
+      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
+      (DeviceIndex "0"))
     ("RELAY SPDT HE"
       (FullPartName "RELAY SPDT HEB.Normal")
       (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
@@ -114,9 +131,6 @@
     (PORTLEFT-L
       (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
       (DeviceIndex "0"))
-    (PORTLEFT-R
-      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
-      (DeviceIndex "0"))
     (PORTBOTH-R
       (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
       (DeviceIndex "0"))
@@ -132,10 +146,6 @@
     (PORTBOTH-L
       (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
       (DeviceIndex "0"))
-    ("CAP NP"
-      (FullPartName "CAP NP.Normal")
-      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
-      (DeviceIndex "0"))
     (Adafruit1334
       (FullPartName "Adafruit1334.Normal")
       (LibraryName
@@ -149,14 +159,6 @@
       (DeviceIndex "0"))
     (TitleBlockANSILargeN
       (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
-      (DeviceIndex "0"))
-    ("PHOTO NPN"
-      (FullPartName "PHOTO NPN.Normal")
-      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
-      (DeviceIndex "0"))
-    (LED
-      (FullPartName "LED.Normal")
-      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\DISCRETE.OLB")
       (DeviceIndex "0")))
   (LastUsedLibraryBrowseDirectory "LIBRARY\PSPICE")
   (MPSSessionName "danie")
@@ -164,71 +166,65 @@
     (FileView
       (Path "Design Resources")
       (Path "Design Resources"
-         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03 diagrammer\hardware - electrical schematic\miotywaffles.dsn")
+         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\miotywaffles.dsn")
       (Path "Design Resources"
-         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03 diagrammer\hardware - electrical schematic\miotywaffles.dsn"
+         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\miotywaffles.dsn"
          "Top")
-      (Path "Design Resources"
-         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03 diagrammer\hardware - electrical schematic\miotywaffles.dsn"
-         "Actuators")
-      (Path "Design Resources"
-         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03 diagrammer\hardware - electrical schematic\miotywaffles.dsn"
-         "Argon")
-      (Path "Design Resources"
-         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03 diagrammer\hardware - electrical schematic\miotywaffles.dsn"
-         "Sensors")
       (Path "Design Resources" "Library")
+      (Path "Design Resources" "Library"
+         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\rgb_sensor.olb")
+      (Path "Design Resources" "Library"
+         "C:\Users\danie\OneDrive\Skrivebord\LIBRARY1.OLB")
       (Path "Outputs")
       (Select "Design Resources"
-         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03 diagrammer\hardware - electrical schematic\miotywaffles.dsn"
-         "Actuators" "PAGE1"))
+         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\miotywaffles.dsn"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 420"))
+        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 420"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 104 1740 104 563")
-        (Scroll "-354 0")
-        (Zoom "63")
-        (Occurrence "/"))
+        (Placement "44 0 1 -1 -1 -8 -31 78 1681 78 537")
+        (Scroll "-75 0")
+        (Zoom "100")
+        (Occurrence "/Actuators1"))
       (Path
-         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
-      (Schematic "Top")
-      (Page "BlockDiagram"))
-    (Doc
-      (Type "COrSchematicDoc")
-      (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 208 1844 208 667")
-        (Scroll "1776 1877")
-        (Zoom "252")
-        (Occurrence "/Sensors1"))
-      (Path
-         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
-      (Schematic "Sensors")
+         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03_DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
+      (Schematic "Actuators")
       (Page "PAGE1"))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 104 1740 104 563")
-        (Scroll "-187 0")
+        (Placement "44 0 1 -1 -1 -8 -31 104 1707 104 563")
+        (Scroll "-75 0")
         (Zoom "100")
         (Occurrence "/IoT Device1"))
       (Path
-         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
+         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03_DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
       (Schematic "Argon")
       (Page "PAGE1"))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 130 1766 130 589")
-        (Scroll "303 1489")
-        (Zoom "252")
-        (Occurrence "/Actuators1"))
+        (Placement "44 0 1 -1 -1 -8 -31 130 1733 130 589")
+        (Scroll "-75 20")
+        (Zoom "100")
+        (Occurrence "/Sensors1"))
       (Path
-         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03 DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
-      (Schematic "Actuators")
-      (Page "PAGE1"))))
+         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03_DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
+      (Schematic "Sensors")
+      (Page "PAGE1"))
+    (Doc
+      (Type "COrSchematicDoc")
+      (Frame
+        (Placement "44 0 1 -1 -1 -8 -31 182 1492 182 641")
+        (Scroll "0 30")
+        (Zoom "100")
+        (Occurrence "/"))
+      (Path
+         "C:\USERS\DANIE\DROPBOX\E5\IOT\PROJECTS\MIOTYWAFFLES\MIOTYWAFFLES\MIOTYWAFFLES\DOC\BILAG\03_DIAGRAMMER\HARDWARE - ELECTRICAL SCHEMATIC\MIOTYWAFFLES.DSN")
+      (Schematic "Top")
+      (Page "BlockDiagram"))))

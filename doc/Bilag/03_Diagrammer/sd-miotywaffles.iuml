@@ -18,10 +18,13 @@ activate "IoT\n Device"
 
 "IoT\n Device" -> "Relay" : setRelay(on)
 activate "Relay"
+
 "IoT\n Device" -> "Buzzer" : playWakeUp()
 "IoT\n Device" -> "RGB\n Color\n Sensor" : getColor()
 activate "RGB\n Color\n Sensor"
+
 return _currentColor
+
 "IoT\n Device" -> "IoT\n Device" : colorRed
 "IoT\n Device" -> "Weather\nAPI" : weatherReportEvent()
 "IoT\n Device" <-- "Weather\nAPI" : event(weatherReport)
