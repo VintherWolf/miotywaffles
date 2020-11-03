@@ -322,7 +322,7 @@ void miotyWaffles()
         if (!rgb.getColor() == noChange)
         {
             Log.error("%s Relay did not turn off!", Time.timeStr().c_str());
-            buzzer.playError(SIGERROR);
+            buzzer.playError();
             return;
         }
     }
