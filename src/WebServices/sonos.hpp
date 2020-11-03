@@ -22,14 +22,11 @@ public:
     SonosControl();
     ~SonosControl();
     bool SonosPlay(String state);
-    bool ConnectedToCloud(void);
-    void ConnectToCloud(void);
 
 private:
     /* Attributes */
-    const String _event = "waffleiron_sonos";
-    const String _states[3] = {"heating", "ready", "baking"};
-    bool _connectedToCloud;
+    static const String _event;
+    static const String _states[3];
     bool _publishToCloudSuccess;
 };
 

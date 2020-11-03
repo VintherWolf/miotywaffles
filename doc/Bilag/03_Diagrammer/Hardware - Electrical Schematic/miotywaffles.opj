@@ -66,6 +66,11 @@
     (Folder "Simulation Profiles"))
   (DefaultLibraryBrowseDirectory "library\PSpice")
   (PartMRUSelector
+    ("RELAY SPDT"
+      (FullPartName "RELAY SPDT.Normal")
+      (LibraryName
+         "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\OLDLIBS\PCBDEV.OLB")
+      (DeviceIndex "0"))
     (touchsensor
       (FullPartName "touchsensor.Normal")
       (LibraryName "C:\USERS\DANIE\ONEDRIVE\SKRIVEBORD\LIBRARY1.OLB")
@@ -156,9 +161,6 @@
       (DeviceIndex "0"))
     (TitleBlock0
       (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
-      (DeviceIndex "0"))
-    (TitleBlockANSILargeN
-      (LibraryName "C:\CADENCE\SPB_17.2\TOOLS\CAPTURE\LIBRARY\CAPSYM.OLB")
       (DeviceIndex "0")))
   (LastUsedLibraryBrowseDirectory "LIBRARY\PSPICE")
   (MPSSessionName "danie")
@@ -170,25 +172,26 @@
       (Path "Design Resources"
          "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\miotywaffles.dsn"
          "Top")
+      (Path "Design Resources"
+         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\miotywaffles.dsn"
+         "Sensors")
       (Path "Design Resources" "Library")
       (Path "Design Resources" "Library"
          "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\rgb_sensor.olb")
       (Path "Design Resources" "Library"
          "C:\Users\danie\OneDrive\Skrivebord\LIBRARY1.OLB")
-      (Path "Outputs")
-      (Select "Design Resources"
-         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\miotywaffles.dsn"))
+      (Path "Outputs"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
       (Frame
-        (Placement "44 2 3 -1 -1 -8 -31 0 200 0 420"))
+        (Placement "44 0 1 -1 -1 -8 -31 0 200 0 420"))
       (Tab 0))
     (Doc
       (Type "COrSchematicDoc")
       (Frame
-        (Placement "44 0 1 -1 -1 -8 -31 78 1681 78 537")
-        (Scroll "-75 0")
+        (Placement "44 2 3 -1 -1 -8 -31 78 1681 78 537")
+        (Scroll "-41 0")
         (Zoom "100")
         (Occurrence "/Actuators1"))
       (Path
@@ -210,7 +213,7 @@
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 130 1733 130 589")
-        (Scroll "-75 20")
+        (Scroll "-75 200")
         (Zoom "100")
         (Occurrence "/Sensors1"))
       (Path

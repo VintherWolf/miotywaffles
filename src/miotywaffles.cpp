@@ -44,7 +44,8 @@
 /* Constants */
 // Max retries to see if Waffle Iron is powered on
 #define MAX_RETRIES 12
-
+#define SIGOK 200
+#define SIGERROR 3000
 #pragma region initialization
 /**
 *=======================================================
@@ -140,21 +141,13 @@ void setup()
  */
 void loop()
 {
-    // Sleeps until Touch Sensor is activated
-    delay(5000);
-    buzzer.playWokeUp();
     digitalWrite(BLUE_LED, LOW);
-    setRelay("off");
     Log.info("%s Goind to sleep! Activate touch sensor to wake up",
              Time.timeStr().c_str());
-
+    buzzer.playGoingToSleep();
     System.sleep(config);
-    toggleLed(BLUE_LED);
-    buzzer.playAngryBirds();
-    Log.info("%s Touch Sensor Activated! Awake now",
-             Time.timeStr().c_str());
 
-    // Run Program
+    // Sleeps until Touch Sensor is activate
     miotyWaffles();
 }
 #pragma endregion loop()
@@ -169,6 +162,10 @@ void miotyWaffles()
 {
 #pragma region mioty init
 
+    toggleLed(BLUE_LED);
+    buzzer.playWokeUp();
+    Log.info("%s Touch Sensor Activated! Awake now",
+             Time.timeStr().c_str());
     // Initialize RGB Sensor
     if (rgb.sensorIsConnected())
     {
@@ -178,7 +175,8 @@ void miotyWaffles()
     else
     {
         Log.error("%s RGB SENSOR NOT PRESENT", Time.timeStr().c_str());
-        //exit(EXIT_FAILURE);
+        buzzer.beep(SIGERROR);
+        return;
     }
 
     Log.info("%s Get Weather Report", Time.timeStr().c_str());
@@ -186,6 +184,7 @@ void miotyWaffles()
 
     // Enable Waffle Iron by turning Relay On
     setRelay("on");
+    buzzer.beep(SIGOK);
 
     // Wait for LED to be Red/Orange
     int retry = 0;
@@ -204,6 +203,7 @@ void miotyWaffles()
             Log.error("Waffle Iron is not powered ON!");
             digitalWrite(BLUE_LED, LOW);
             setRelay("off");
+            buzzer.beep(SIGERROR);
             return;
         }
     }
@@ -216,12 +216,12 @@ void miotyWaffles()
     **/
     Log.info("%s State is now: Heating", Time.timeStr().c_str());
 
-    // Change Track on Sonos System
+    // Change Track on Sonos Speaker
     if (!sc.SonosPlay("heating"))
     {
         Log.warn("%s Connection Lost: Music cannot play!",
                  Time.timeStr().c_str());
-        // TO-DO: Buzzer ->> Beep Beep
+        buzzer.playError();
     }
     Log.info("%s Music Should Change About Now!",
              Time.timeStr().c_str());
@@ -239,8 +239,10 @@ void miotyWaffles()
         {
             Log.error("Took too long to heat up!");
             setRelay("off");
+            buzzer.beep(SIGERROR);
             return;
         }
+        buzzer.beep(SIGOK);
     }
 #pragma endregion state Heating
 #pragma region State Ready
@@ -256,24 +258,26 @@ void miotyWaffles()
     {
         Log.warn("%s Connection Lost: Music cannot play!",
                  Time.timeStr().c_str());
-        // Buzzer ->> Beep Beep
+        buzzer.playError();
     }
     Log.info("%s Music Should Change About Now!", Time.timeStr().c_str());
 
-    // Wait for WaffleIron Lid to open:
+    // Wait for user to open lid:
     while (!lidIsOpen())
     {
         toggleLed(BLUE_LED);
         delay(1000);
     }
     Log.info("%s Lid was Opened!", Time.timeStr().c_str());
+    buzzer.beep(SIGOK);
 
-    // Wait for WaffleIron Lid to close:
+    // Wait for WaffleIron Lid to be closed:
     while (lidIsOpen())
     {
         toggleLed(BLUE_LED);
-        delay(200);
+        delay(100);
     }
+    buzzer.beep(SIGOK);
     Log.info("%s Lid was Closed!", Time.timeStr().c_str());
 #pragma endregion state Ready
 #pragma region State Baking
@@ -294,7 +298,7 @@ void miotyWaffles()
     {
         Log.warn("%s Connection Lost: Music cannot play!",
                  Time.timeStr().c_str());
-        // Buzzer ->> Beep Beep
+        buzzer.playError();
     }
     Log.info("%s Music Should Change About Now!", Time.timeStr().c_str());
 #pragma endregion State baking
@@ -305,24 +309,27 @@ void miotyWaffles()
         delay(10);
     }
 
-    // TO-DO: Turn off Relay
-    digitalWrite(RELAY_WIRON, LOW);
-    // TO-DO: Check that Relay turned off (no LED light from waffleiron)
+    setRelay("off");
+
+    // Check that Relay turned off after a small delay
+    // I.e. no LED light from waffleiron
     delay(300);
     if (!rgb.getColor() == noChange)
     {
         Log.warn("%s Tries to turn off Relay one more time!", Time.timeStr().c_str());
-        digitalWrite(RELAY_WIRON, LOW);
+        setRelay("off");
         delay(1000);
         if (!rgb.getColor() == noChange)
         {
             Log.error("%s Relay did not turn off!", Time.timeStr().c_str());
-            exit(EXIT_FAILURE);
+            buzzer.playError(SIGERROR);
+            return;
         }
     }
-    delay(2000);
+
     Log.info("%s All Done! Have an Enjoyable Day!", Time.timeStr().c_str());
     digitalWrite(BLUE_LED, LOW);
+    buzzer.beep(SIGOK);
     return;
 }
 #pragma endregion Process is Done

@@ -13,7 +13,6 @@
 
 SonosControl::SonosControl()
 {
-    _connectedToCloud = false;
     _publishToCloudSuccess = false;
 }
 
@@ -41,12 +40,5 @@ bool SonosControl::SonosPlay(String state)
     return _publishToCloudSuccess;
 }
 
-bool SonosControl::ConnectedToCloud()
-{
-    //
-}
-
-void SonosControl::ConnectToCloud()
-{
-    //
-}
+const String SonosControl::_event = "waffleiron_sonos";
+const String SonosControl::_states[3] = {"heating", "ready", "baking"};

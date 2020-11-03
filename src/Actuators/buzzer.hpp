@@ -116,9 +116,9 @@ public:
     ~Buzzer();
     void beep(int ms);
     void playError();
-    void playAngryBirds();
     void playSuperMario();
     void playWokeUp();
+    void playGoingToSleep();
 };
 
 #endif

@@ -57,10 +57,10 @@ void Buzzer::_playMelody(int melody[], int noteDurations[], int tempo)
 }
 
 /**
- * @brief Play Angry Birds Theme
+ * @brief Play a melody when waking up
  * 
  */
-void Buzzer::playAngryBirds()
+void Buzzer::playWokeUp()
 {
     // https://www.youtube.com/watch?v=B9iPJaDNuO4
     int tempo = 65;
@@ -157,8 +157,6 @@ void Buzzer::playError()
     int tempo = 80;
     int melody[] = {
         NOTE_F4, NOTE_F3, NOTE_F2, NOTE_F3,
-        NOTE_A4, NOTE_A3, NOTE_A2, NOTE_A3,
-        NOTE_F4, NOTE_F3, NOTE_F2, NOTE_F3,
         NOTE_A4, NOTE_A3, NOTE_A2, NOTE_A3};
 
     int noteDurations[] = {
@@ -176,13 +174,13 @@ void Buzzer::playError()
  * @brief Play signal when IoT Device wakes up
  * 
  */
-void Buzzer::playWokeUp()
+void Buzzer::playGoingToSleep()
 {
-    int tempo = 80;
+    int tempo = 40;
     int melody[] = {
 
-        NOTE_F4, NOTE_A4, NOTE_F5, NOTE_A5,
-        NOTE_G5, NOTE_F6, NOTE_G6, NOTE_A6};
+        NOTE_A6, NOTE_A5, NOTE_A4, NOTE_A3,
+        NOTE_A2, 0, 0, NOTE_A2};
 
     int noteDurations[] = {
 
