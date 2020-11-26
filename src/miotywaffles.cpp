@@ -45,7 +45,7 @@
 // Max retries to see if Waffle Iron is powered on
 #define MAX_RETRIES 12
 #define SIGOK 200
-#define SIGERROR 3000
+#define SIGERROR 2000
 #pragma region initialization
 /**
 *=======================================================
@@ -184,7 +184,6 @@ void miotyWaffles()
 
     // Enable Waffle Iron by turning Relay On
     setRelay("on");
-    buzzer.beep(SIGOK);
 
     // Wait for LED to be Red/Orange
     int retry = 0;
@@ -242,8 +241,8 @@ void miotyWaffles()
             buzzer.beep(SIGERROR);
             return;
         }
-        buzzer.beep(SIGOK);
     }
+    buzzer.beep(SIGOK);
 #pragma endregion state Heating
 #pragma region State Ready
     /**

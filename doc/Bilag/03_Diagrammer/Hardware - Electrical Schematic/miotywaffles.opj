@@ -180,7 +180,10 @@
          "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\rgb_sensor.olb")
       (Path "Design Resources" "Library"
          "C:\Users\danie\OneDrive\Skrivebord\LIBRARY1.OLB")
-      (Path "Outputs"))
+      (Path "Outputs")
+      (Select "Design Resources"
+         "c:\users\danie\dropbox\e5\iot\projects\miotywaffles\miotywaffles\miotywaffles\doc\bilag\03_diagrammer\hardware - electrical schematic\miotywaffles.dsn"
+         "Sensors" "PAGE1"))
     (HierarchyView)
     (Doc
       (Type "COrCapturePMDoc")
@@ -191,7 +194,7 @@
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 2 3 -1 -1 -8 -31 78 1681 78 537")
-        (Scroll "-41 0")
+        (Scroll "-187 140")
         (Zoom "100")
         (Occurrence "/Actuators1"))
       (Path
@@ -213,7 +216,7 @@
       (Type "COrSchematicDoc")
       (Frame
         (Placement "44 0 1 -1 -1 -8 -31 130 1733 130 589")
-        (Scroll "-75 200")
+        (Scroll "-75 355")
         (Zoom "100")
         (Occurrence "/Sensors1"))
       (Path

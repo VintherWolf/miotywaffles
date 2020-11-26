@@ -75,7 +75,8 @@ void Buzzer::playWokeUp()
         0,
         NOTE_E4,
         0,
-        NOTE_B4
+        NOTE_B4,
+        0
 
     };
 
@@ -84,13 +85,14 @@ void Buzzer::playWokeUp()
         8,
         8, // e
         8,
-        4, // b
+        8, // b
         8,
         8, 8, 8, // e f# g
         8,
         8, // e
         8,
-        4 // b
+        8,
+        8 // b
     };
 
     this->_nodes = (sizeof(melody) / sizeof(int));
